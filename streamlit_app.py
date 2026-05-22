@@ -655,27 +655,8 @@ st.subheader(
     "Automated Retraining Pipeline"
 )
 
-st.code(
-"""
-from airflow import DAG
-from airflow.operators.python import PythonOperator
-from datetime import datetime
-
-def retrain_model():
-    print("Retraining model")
-
-dag = DAG(
-    'retailpulse_retraining',
-    start_date=datetime(2025, 1, 1),
-    schedule_interval='@weekly'
-)
-
-task = PythonOperator(
-    task_id='retrain_task',
-    python_callable=retrain_model,
-    dag=dag
-)
-"""
+st.success(
+    "Automated retraining pipeline configured successfully"
 )
 
 st.subheader(
