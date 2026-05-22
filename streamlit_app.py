@@ -25,7 +25,9 @@ st.set_page_config(
 # ---------------------------------
 
 st.title("RetailPulse Dashboard")
-st.write("Week 1: EDA, Data Cleaning, RFM, Segmentation and Time-Series Analysis")
+st.write(
+    "Week 1: EDA, Data Cleaning, RFM, Segmentation and Time-Series Analysis"
+)
 
 # ---------------------------------
 # SIDEBAR
@@ -55,23 +57,47 @@ if not os.path.exists(file_path):
     )
     st.stop()
 
-# Load Full Dataset
-df = pd.read_excel(file_path, engine="openpyxl")
-
-st.success("Dataset loaded successfully")
+# Read Dataset
+df = pd.read_excel(
+    file_path,
+    engine="openpyxl"
+)
 
 # ---------------------------------
-# DATA CLEANING
+# CLEAN COLUMN NAMES
+# ---------------------------------
+
+df.columns = df.columns.str.strip()
+
+# ---------------------------------
+# REMOVE DUPLICATES ONLY
 # ---------------------------------
 
 df = df.drop_duplicates()
-df = df.dropna()
 
-# Create TotalAmount
+# ---------------------------------
+# SHOW DATASET INFO
+# ---------------------------------
+
+st.success("Dataset loaded successfully")
+
+st.subheader("Dataset Columns")
+st.write(df.columns.tolist())
+
+st.subheader("Dataset Shape After Cleaning")
+st.write(df.shape)
+
+# ---------------------------------
+# CREATE TOTAL AMOUNT
+# ---------------------------------
+
 if "Quantity" in df.columns and "Price" in df.columns:
     df["TotalAmount"] = df["Quantity"] * df["Price"]
 
-# Convert Date
+# ---------------------------------
+# CONVERT DATE COLUMN
+# ---------------------------------
+
 if "Invoice Date" in df.columns:
     df["Invoice Date"] = pd.to_datetime(
         df["Invoice Date"],
@@ -106,14 +132,32 @@ else:
 
 # Average Order Value
 if "TotalAmount" in df.columns and "Invoice" in df.columns:
-    avg_order = df["TotalAmount"].sum() / max(df["Invoice"].nunique(), 1)
+    avg_order_value = (
+        df["TotalAmount"].sum() /
+        max(df["Invoice"].nunique(), 1)
+    )
 else:
-    avg_order = 0
+    avg_order_value = 0
 
-col1.metric("Total Sales", f"${total_sales:,.2f}")
-col2.metric("Customers", total_customers)
-col3.metric("Invoices", total_invoices)
-col4.metric("Avg Order Value", f"${avg_order:,.2f}")
+col1.metric(
+    "Total Sales",
+    f"${total_sales:,.2f}"
+)
+
+col2.metric(
+    "Total Customers",
+    total_customers
+)
+
+col3.metric(
+    "Total Invoices",
+    total_invoices
+)
+
+col4.metric(
+    "Avg Order Value",
+    f"${avg_order_value:,.2f}"
+)
 
 # ---------------------------------
 # DATASET OVERVIEW
@@ -124,17 +168,27 @@ if section == "Dataset Overview":
     st.subheader("Dataset Preview")
     st.dataframe(df.head())
 
-    st.subheader("Dataset Shape")
-    st.write(df.shape)
+    st.subheader("Summary Statistics")
+
+    try:
+        st.dataframe(df.describe())
+    except:
+        st.write("No numeric columns available.")
 
     st.subheader("Missing Values")
-    missing_df = df.isnull().sum().reset_index()
-    missing_df.columns = ["Column", "Missing Values"]
 
-    st.dataframe(missing_df)
+    missing_values = (
+        df.isnull()
+        .sum()
+        .reset_index()
+    )
 
-    st.subheader("Summary Statistics")
-    st.dataframe(df.describe())
+    missing_values.columns = [
+        "Column",
+        "Missing Values"
+    ]
+
+    st.dataframe(missing_values)
 
     # Download Button
     csv = df.to_csv(index=False)
@@ -152,7 +206,9 @@ if section == "Dataset Overview":
 
 elif section == "EDA":
 
-    numeric_cols = df.select_dtypes(include="number").columns
+    numeric_cols = df.select_dtypes(
+        include="number"
+    ).columns
 
     # Histogram
     if len(numeric_cols) > 0:
@@ -170,14 +226,19 @@ elif section == "EDA":
             title=f"{selected_col} Distribution"
         )
 
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(
+            fig,
+            use_container_width=True
+        )
 
         # Correlation Heatmap
         st.subheader("Correlation Heatmap")
 
         corr = df[numeric_cols].corr()
 
-        fig, ax = plt.subplots(figsize=(12, 8))
+        fig, ax = plt.subplots(
+            figsize=(12, 8)
+        )
 
         sns.heatmap(
             corr,
@@ -188,31 +249,41 @@ elif section == "EDA":
 
         st.pyplot(fig)
 
-    # Product Category
+    # Product Category Distribution
     if "Product_Category" in df.columns:
 
-        st.subheader("Product Category Distribution")
+        st.subheader(
+            "Product Category Distribution"
+        )
 
         fig = px.histogram(
             df,
             x="Product_Category"
         )
 
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(
+            fig,
+            use_container_width=True
+        )
 
-    # Customer Type
+    # Customer Type Distribution
     if "Customer_Type" in df.columns:
 
-        st.subheader("Customer Type Distribution")
+        st.subheader(
+            "Customer Type Distribution"
+        )
 
         fig = px.histogram(
             df,
             x="Customer_Type"
         )
 
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(
+            fig,
+            use_container_width=True
+        )
 
-    # Churn
+    # Churn Distribution
     if "Churn" in df.columns:
 
         st.subheader("Churn Distribution")
@@ -222,7 +293,10 @@ elif section == "EDA":
             x="Churn"
         )
 
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(
+            fig,
+            use_container_width=True
+        )
 
 # ---------------------------------
 # TIME SERIES ANALYSIS
@@ -230,20 +304,33 @@ elif section == "EDA":
 
 elif section == "Time Series Analysis":
 
-    if "Invoice Date" in df.columns and "TotalAmount" in df.columns:
+    if (
+        "Invoice Date" in df.columns and
+        "TotalAmount" in df.columns
+    ):
 
         st.subheader("Daily Sales Trend")
 
-        daily_sales = df.groupby(
-            df["Invoice Date"].dt.date
-        )["TotalAmount"].sum()
+        daily_sales = (
+            df.groupby(
+                df["Invoice Date"].dt.date
+            )["TotalAmount"]
+            .sum()
+        )
 
-        daily_sales.index = pd.to_datetime(daily_sales.index)
+        daily_sales.index = pd.to_datetime(
+            daily_sales.index
+        )
 
-        daily_sales_df = daily_sales.reset_index()
-        daily_sales_df.columns = ["Date", "Sales"]
+        daily_sales_df = (
+            daily_sales.reset_index()
+        )
 
-        # Line Chart
+        daily_sales_df.columns = [
+            "Date",
+            "Sales"
+        ]
+
         fig = px.line(
             daily_sales_df,
             x="Date",
@@ -251,22 +338,40 @@ elif section == "Time Series Analysis":
             title="Daily Sales Trend"
         )
 
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(
+            fig,
+            use_container_width=True
+        )
 
         # ADF Test
         if len(daily_sales_df) > 20:
 
-            st.subheader("ADF Stationarity Test")
+            st.subheader(
+                "ADF Stationarity Test"
+            )
 
-            result = adfuller(daily_sales_df["Sales"])
+            result = adfuller(
+                daily_sales_df["Sales"]
+            )
 
-            st.write("ADF Statistic:", result[0])
-            st.write("P-value:", result[1])
+            st.write(
+                "ADF Statistic:",
+                result[0]
+            )
+
+            st.write(
+                "P-value:",
+                result[1]
+            )
 
             if result[1] < 0.05:
-                st.success("The Time Series is Stationary")
+                st.success(
+                    "The Time Series is Stationary"
+                )
             else:
-                st.warning("The Time Series is Non-Stationary")
+                st.warning(
+                    "The Time Series is Non-Stationary"
+                )
 
 # ---------------------------------
 # RFM SEGMENTATION
@@ -281,19 +386,30 @@ elif section == "RFM Segmentation":
         "TotalAmount"
     ]
 
-    if all(col in df.columns for col in required_cols):
+    if all(
+        col in df.columns
+        for col in required_cols
+    ):
 
-        st.subheader("RFM Customer Segmentation")
+        st.subheader(
+            "RFM Customer Segmentation"
+        )
 
         # Snapshot Date
         snapshot_date = df["Invoice Date"].max()
 
         # Create RFM Table
-        rfm = df.groupby("Customer ID").agg({
-            "Invoice Date": lambda x: (
+        rfm = df.groupby(
+            "Customer ID"
+        ).agg({
+
+            "Invoice Date":
+            lambda x: (
                 snapshot_date - x.max()
             ).days,
+
             "Invoice": "nunique",
+
             "TotalAmount": "sum"
         })
 
@@ -321,7 +437,9 @@ elif section == "RFM Segmentation":
             n_init=10
         )
 
-        rfm["Cluster"] = kmeans.fit_predict(scaled_data)
+        rfm["Cluster"] = kmeans.fit_predict(
+            scaled_data
+        )
 
         # Silhouette Score
         score = silhouette_score(
@@ -329,10 +447,14 @@ elif section == "RFM Segmentation":
             rfm["Cluster"]
         )
 
-        st.write("Silhouette Score:", round(score, 3))
+        st.write(
+            "Silhouette Score:",
+            round(score, 3)
+        )
 
         # Display RFM Table
         st.subheader("RFM Table")
+
         st.dataframe(rfm.head())
 
         # Scatter Plot
@@ -344,17 +466,31 @@ elif section == "RFM Segmentation":
             title="Customer Segmentation"
         )
 
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(
+            fig,
+            use_container_width=True
+        )
 
         # Cluster Summary
         st.subheader("Cluster Summary")
 
-        cluster_summary = rfm.groupby("Cluster").mean()
+        cluster_summary = (
+            rfm.groupby("Cluster")
+            .mean()
+        )
 
         st.dataframe(cluster_summary)
+
+    else:
+
+        st.error(
+            "Required columns for RFM analysis are missing."
+        )
 
 # ---------------------------------
 # FOOTER
 # ---------------------------------
 
-st.success("RetailPulse Dashboard Executed Successfully")
+st.success(
+    "RetailPulse Dashboard Executed Successfully"
+)
