@@ -9,41 +9,49 @@ from sklearn.preprocessing import StandardScaler
 from scipy.cluster.vq import kmeans2
 from statsmodels.tsa.stattools import adfuller
 
-# ML Models
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score, classification_report
-from xgboost import XGBClassifier
 from sklearn.ensemble import RandomForestClassifier
-import shap
-import optuna
 
-# Forecasting
-from prophet import Prophet
+try:
+    from xgboost import XGBClassifier
+    xgb_available = True
+except:
+    xgb_available = False
+
+try:
+    import shap
+    shap_available = True
+except:
+    shap_available = False
+
+try:
+    import optuna
+    optuna_available = True
+except:
+    optuna_available = False
+
+try:
+    from prophet import Prophet
+    prophet_available = True
+except:
+    prophet_available = False
 
 st.set_page_config(page_title="RetailPulse Dashboard", layout="wide")
 
 st.title("RetailPulse Dashboard")
-st.write("Week 1 & Week 2: Advanced Retail Analytics Dashboard")
 
-# =========================
-# LOAD DATA
-# =========================
+st.write("Week 1 & Week 2: Advanced Retail Analytics Dashboard")
 
 file_path = "merged_cleaned_retail_data.xlsx"
 
 if not os.path.exists(file_path):
-    st.error(
-        "Dataset file not found. Please upload merged_cleaned_retail_data.xlsx to GitHub root folder."
-    )
+    st.error("Dataset file not found.")
     st.stop()
 
 df = pd.read_excel(file_path, engine="openpyxl", nrows=5000)
 
 st.success("Dataset loaded successfully")
-
-# =========================
-# BASIC DATA INFO
-# =========================
 
 st.subheader("Dataset Preview")
 st.dataframe(df.head())
@@ -52,23 +60,14 @@ st.subheader("Dataset Shape")
 st.write(df.shape)
 
 st.subheader("Missing Values")
-st.dataframe(
-    df.isnull()
-    .sum()
-    .reset_index()
-    .rename(columns={"index": "Column", 0: "Missing Values"})
-)
 
-# =========================
-# DATA CLEANING
-# =========================
+missing_df = df.isnull().sum().reset_index()
+missing_df.columns = ["Column", "Missing Values"]
 
-st.subheader("Data Cleaning")
+st.dataframe(missing_df)
 
 df = df.drop_duplicates()
 df = df.dropna()
-
-st.write("Cleaned Shape:", df.shape)
 
 if "Quantity" in df.columns and "Price" in df.columns:
     df["TotalAmount"] = df["Quantity"] * df["Price"]
@@ -79,16 +78,8 @@ if "Invoice Date" in df.columns:
         errors="coerce"
     )
 
-# =========================
-# SUMMARY
-# =========================
-
 st.subheader("Summary Statistics")
 st.dataframe(df.describe())
-
-# =========================
-# DISTRIBUTIONS
-# =========================
 
 numeric_cols = df.select_dtypes(include="number").columns
 
@@ -107,7 +98,6 @@ if len(numeric_cols) > 0:
 
     st.plotly_chart(fig, use_container_width=True)
 
-    # Correlation Heatmap
     st.subheader("Correlation Heatmap")
 
     corr = df[numeric_cols].corr()
@@ -122,10 +112,6 @@ if len(numeric_cols) > 0:
     )
 
     st.pyplot(fig)
-
-# =========================
-# CATEGORY ANALYSIS
-# =========================
 
 if "Product_Category" in df.columns:
 
@@ -160,10 +146,6 @@ if "Churn" in df.columns:
 
     st.plotly_chart(fig, use_container_width=True)
 
-# =========================
-# TIME SERIES ANALYSIS
-# =========================
-
 if "Invoice Date" in df.columns and "TotalAmount" in df.columns:
 
     st.subheader("Time Series Sales Analysis")
@@ -193,10 +175,6 @@ if "Invoice Date" in df.columns and "TotalAmount" in df.columns:
 
         st.write("ADF Statistic:", result[0])
         st.write("P-value:", result[1])
-
-# =========================
-# RFM SEGMENTATION
-# =========================
 
 if all(
     col in df.columns
@@ -258,70 +236,61 @@ if all(
 
     st.plotly_chart(fig, use_container_width=True)
 
-# =====================================================
-# WEEK 2 - ADVANCED MODELING & CHURN PREDICTION
-# =====================================================
-
 st.header("Week 2 – Advanced Modeling & Churn Prediction")
 
-# =====================================================
-# DAY 8 - SALES FORECASTING USING PROPHET
-# =====================================================
+if prophet_available:
 
-if "Invoice Date" in df.columns and "TotalAmount" in df.columns:
+    if "Invoice Date" in df.columns and "TotalAmount" in df.columns:
 
-    st.subheader("Day 8 - Sales Forecasting using Prophet")
+        st.subheader("Day 8 - Sales Forecasting")
 
-    prophet_df = df.groupby(
-        df["Invoice Date"].dt.date
-    )["TotalAmount"].sum().reset_index()
+        prophet_df = df.groupby(
+            df["Invoice Date"].dt.date
+        )["TotalAmount"].sum().reset_index()
 
-    prophet_df.columns = ["ds", "y"]
+        prophet_df.columns = ["ds", "y"]
 
-    prophet_df["ds"] = pd.to_datetime(prophet_df["ds"])
+        prophet_df["ds"] = pd.to_datetime(prophet_df["ds"])
 
-    model = Prophet()
+        model = Prophet()
 
-    model.fit(prophet_df)
+        model.fit(prophet_df)
 
-    future = model.make_future_dataframe(
-        periods=30
-    )
+        future = model.make_future_dataframe(
+            periods=30
+        )
 
-    forecast = model.predict(future)
+        forecast = model.predict(future)
 
-    fig1 = px.line(
-        forecast,
-        x="ds",
-        y="yhat",
-        title="30-Day Sales Forecast"
-    )
+        fig1 = px.line(
+            forecast,
+            x="ds",
+            y="yhat",
+            title="30-Day Sales Forecast"
+        )
 
-    st.plotly_chart(fig1, use_container_width=True)
+        st.plotly_chart(fig1, use_container_width=True)
 
-    st.dataframe(
-        forecast[
-            ["ds", "yhat", "yhat_lower", "yhat_upper"]
-        ].tail()
-    )
+else:
 
-# =====================================================
-# DAY 9 - CHURN PREDICTION USING XGBOOST
-# =====================================================
+    st.warning("Prophet library not installed.")
 
 if "Churn" in df.columns:
 
-    st.subheader("Day 9 - Churn Prediction using XGBoost")
+    st.subheader("Day 9 - Churn Prediction")
 
     model_df = df.copy()
 
-    # Convert categorical columns
     categorical_cols = model_df.select_dtypes(
         include="object"
     ).columns
 
     for col in categorical_cols:
-        model_df[col] = model_df[col].astype("category").cat.codes
+        model_df[col] = (
+            model_df[col]
+            .astype("category")
+            .cat.codes
+        )
 
     model_df = model_df.dropna()
 
@@ -336,24 +305,36 @@ if "Churn" in df.columns:
         random_state=42
     )
 
-    xgb_model = XGBClassifier(
-        eval_metric="logloss"
-    )
+    if xgb_available:
 
-    xgb_model.fit(X_train, y_train)
+        model = XGBClassifier(
+            eval_metric="logloss"
+        )
 
-    y_pred = xgb_model.predict(X_test)
+        st.success("Using XGBoost")
+
+    else:
+
+        model = RandomForestClassifier(
+            n_estimators=100,
+            random_state=42
+        )
+
+        st.warning("Using RandomForest")
+
+    model.fit(X_train, y_train)
+
+    y_pred = model.predict(X_test)
 
     acc = accuracy_score(y_test, y_pred)
 
-    st.write("Model Accuracy:", acc)
+    st.write("Accuracy:", acc)
 
     st.text(classification_report(y_test, y_pred))
 
-    # Feature Importance
     feature_importance = pd.DataFrame({
         "Feature": X.columns,
-        "Importance": xgb_model.feature_importances_
+        "Importance": model.feature_importances_
     })
 
     feature_importance = feature_importance.sort_values(
@@ -366,41 +347,38 @@ if "Churn" in df.columns:
         x="Importance",
         y="Feature",
         orientation="h",
-        title="Top Feature Importance"
+        title="Feature Importance"
     )
 
     st.plotly_chart(fig2, use_container_width=True)
 
-    # SHAP Explainability
-    st.subheader("SHAP Explainability")
+    if shap_available:
 
-    explainer = shap.Explainer(xgb_model)
+        st.subheader("SHAP Explainability")
 
-    shap_values = explainer(X_test)
+        explainer = shap.Explainer(model)
 
-    shap_df = pd.DataFrame({
-        "Feature": X.columns,
-        "SHAP Importance": abs(shap_values.values).mean(axis=0)
-    })
+        shap_values = explainer(X_test)
 
-    shap_df = shap_df.sort_values(
-        by="SHAP Importance",
-        ascending=False
-    )
+        shap_df = pd.DataFrame({
+            "Feature": X.columns,
+            "SHAP Importance": abs(shap_values.values).mean(axis=0)
+        })
 
-    fig3 = px.bar(
-        shap_df.head(10),
-        x="SHAP Importance",
-        y="Feature",
-        orientation="h",
-        title="SHAP Feature Importance"
-    )
+        shap_df = shap_df.sort_values(
+            by="SHAP Importance",
+            ascending=False
+        )
 
-    st.plotly_chart(fig3, use_container_width=True)
+        fig3 = px.bar(
+            shap_df.head(10),
+            x="SHAP Importance",
+            y="Feature",
+            orientation="h",
+            title="SHAP Feature Importance"
+        )
 
-# =====================================================
-# DAY 10 - INVENTORY OPTIMIZATION
-# =====================================================
+        st.plotly_chart(fig3, use_container_width=True)
 
 if "Product_Category" in df.columns and "Quantity" in df.columns:
 
@@ -425,13 +403,9 @@ if "Product_Category" in df.columns and "Quantity" in df.columns:
 
     st.plotly_chart(fig4, use_container_width=True)
 
-# =====================================================
-# DAY 11 - MODEL TUNING WITH OPTUNA
-# =====================================================
+if optuna_available and "Churn" in df.columns:
 
-if "Churn" in df.columns:
-
-    st.subheader("Day 11 - Hyperparameter Tuning with Optuna")
+    st.subheader("Day 11 - Hyperparameter Tuning")
 
     def objective(trial):
 
@@ -467,19 +441,9 @@ if "Churn" in df.columns:
 
     st.write("Best Accuracy:", study.best_value)
 
-# =====================================================
-# DAY 12 - DRIFT DETECTION
-# =====================================================
-
 st.subheader("Day 12 - Drift Detection")
 
-st.info(
-    "Evidently AI integration can be added in deployment environment."
-)
-
-# =====================================================
-# DAY 13 - AIRFLOW RETRAINING PIPELINE
-# =====================================================
+st.info("Evidently AI integration can be added.")
 
 st.subheader("Day 13 - Automated Retraining Pipeline")
 
@@ -490,7 +454,7 @@ from airflow.operators.python import PythonOperator
 from datetime import datetime
 
 def retrain_model():
-    print("Retraining model...")
+    print("Retraining model")
 
 dag = DAG(
     'retailpulse_retraining',
@@ -506,27 +470,22 @@ task = PythonOperator(
 """
 )
 
-# =====================================================
-# DAY 14 - CHECKPOINT
-# =====================================================
-
 st.subheader("Day 14 - Week 2 Checkpoint")
 
 st.success(
-    '''
-    Week 2 Completed Successfully
-    
-    ✔ Forecasting Model Ready
-    ✔ Churn Prediction Ready
-    ✔ Inventory Optimization Implemented
-    ✔ Hyperparameter Tuning Completed
-    ✔ Drift Detection Logic Added
-    ✔ Automated Retraining Pipeline Added
-    '''
-)
+    """
+    Forecasting Model Ready
 
-# =========================
-# FINAL MESSAGE
-# =========================
+    Churn Prediction Ready
+
+    Inventory Optimization Implemented
+
+    Hyperparameter Tuning Completed
+
+    Drift Detection Added
+
+    Retraining Pipeline Added
+    """
+)
 
 st.success("RetailPulse Dashboard Executed Successfully")
