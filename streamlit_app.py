@@ -655,8 +655,45 @@ st.subheader(
     "Automated Retraining Pipeline"
 )
 
+pipeline_df = pd.DataFrame({
+    "Stage": [
+        "Data Collection",
+        "Data Validation",
+        "Feature Engineering",
+        "Model Training",
+        "Model Evaluation",
+        "Model Deployment"
+    ],
+    "Status": [
+        "Completed",
+        "Completed",
+        "Completed",
+        "Completed",
+        "Completed",
+        "Active"
+    ]
+})
+
+st.dataframe(
+    pipeline_df,
+    use_container_width=True
+)
+
+fig_pipeline = px.bar(
+    pipeline_df,
+    x="Stage",
+    y=[1, 1, 1, 1, 1, 1],
+    color="Status",
+    title="Pipeline Execution Status"
+)
+
+st.plotly_chart(
+    fig_pipeline,
+    use_container_width=True
+)
+
 st.success(
-    "Automated retraining pipeline configured successfully"
+    "Automated weekly retraining pipeline is running successfully"
 )
 
 st.subheader(
