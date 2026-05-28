@@ -34,7 +34,7 @@ st.markdown("""
 <style>
 
 .main {
-    background-color: #f5f7fa;
+    background-color: red;
 }
 
 h1, h2, h3 {
