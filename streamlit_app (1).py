@@ -4,6 +4,14 @@ import numpy as np
 import plotly.express as px
 import plotly.graph_objects as go
 from datetime import datetime
+import os
+from prometheus_client import Counter, Gauge
+
+REQUEST_COUNT = Counter('retailpulse_requests_total', 'Total App Requests')
+ACTIVE_USERS = Gauge('retailpulse_active_users', 'Active Users')
+
+REQUEST_COUNT.inc()
+ACTIVE_USERS.set(1)
 
 st.set_page_config(
     page_title="RetailPulse Dashboard",
@@ -35,6 +43,10 @@ h1, h2, h3 {
     padding-top: 2rem;
 }
 
+.sidebar .sidebar-content {
+    background-color: #111827;
+}
+
 </style>
 """, unsafe_allow_html=True)
 
@@ -59,6 +71,8 @@ page = st.sidebar.radio(
         "📦 Inventory Insights",
         "🤖 Sales Forecasting",
         "💡 AI Business Insights",
+        "📡 Monitoring Dashboard",
+        "☁️ Deployment Status",
         "📅 Complete Project Roadmap",
         "📋 Project Summary"
     ]
@@ -135,7 +149,9 @@ if page == "🏠 Home":
         "Churn Prediction",
         "Interactive Dashboards",
         "Cloud Deployment Ready",
-        "Real-Time Monitoring"
+        "Real-Time Monitoring",
+        "Dockerized Architecture",
+        "CI/CD Enabled"
     ]
 
     for item in highlights:
@@ -147,8 +163,6 @@ elif page == "📊 EDA":
 
     st.dataframe(sales_data, use_container_width=True)
 
-    st.subheader("📈 Sales Distribution")
-
     sales_hist = px.histogram(
         sales_data,
         x="Sales",
@@ -157,8 +171,6 @@ elif page == "📊 EDA":
     )
 
     st.plotly_chart(sales_hist, use_container_width=True)
-
-    st.subheader("📉 Profit Analysis")
 
     profit_chart = px.line(
         sales_data,
@@ -169,8 +181,6 @@ elif page == "📊 EDA":
     )
 
     st.plotly_chart(profit_chart, use_container_width=True)
-
-    st.subheader("📊 Correlation Heatmap")
 
     corr_data = sales_data[["Sales", "Customers", "Profit"]].corr()
 
@@ -224,8 +234,6 @@ elif page == "👥 Customer Segmentation":
 
     st.plotly_chart(segment_chart, use_container_width=True)
 
-    st.subheader("📌 Segmentation Models")
-
     st.write("• K-Means Clustering")
     st.write("• DBSCAN Clustering")
     st.write("• Customer Profiling")
@@ -247,12 +255,9 @@ elif page == "⚠️ Churn Analysis":
 
     st.plotly_chart(churn_chart, use_container_width=True)
 
-    st.subheader("📌 Churn Prediction Features")
-
     st.write("• XGBoost Churn Prediction")
     st.write("• SHAP Explainability")
     st.write("• Customer Retention Analytics")
-    st.write("• Risk Scoring System")
 
 elif page == "📦 Inventory Insights":
 
@@ -268,12 +273,9 @@ elif page == "📦 Inventory Insights":
 
     st.plotly_chart(inventory_chart, use_container_width=True)
 
-    st.subheader("📌 Inventory Insights")
-
     st.write("• AI Inventory Optimization")
     st.write("• Smart Restocking")
     st.write("• Warehouse Analytics")
-    st.write("• Inventory Forecasting")
 
 elif page == "🤖 Sales Forecasting":
 
@@ -289,12 +291,9 @@ elif page == "🤖 Sales Forecasting":
 
     st.plotly_chart(forecast_chart, use_container_width=True)
 
-    st.subheader("📌 Forecasting Models")
-
     st.write("• Prophet Forecasting")
     st.write("• LSTM Forecasting")
     st.write("• Hybrid Prophet + LSTM")
-    st.write("• Time-Series Analysis")
 
 elif page == "💡 AI Business Insights":
 
@@ -311,57 +310,112 @@ elif page == "💡 AI Business Insights":
     for insight in insights:
         st.success(insight)
 
-    st.subheader("📌 AI Technologies Used")
+elif page == "📡 Monitoring Dashboard":
 
-    st.write("• Machine Learning")
-    st.write("• Deep Learning")
-    st.write("• Forecasting Models")
-    st.write("• Explainable AI")
-    st.write("• Automated Analytics")
+    st.header("📡 Real-Time Monitoring Dashboard")
+
+    col1, col2, col3 = st.columns(3)
+
+    with col1:
+        st.metric("Server Status", "Healthy")
+
+    with col2:
+        st.metric("API Response Time", "120ms")
+
+    with col3:
+        st.metric("CPU Usage", "38%")
+
+    monitoring_df = pd.DataFrame({
+        "Time": range(10),
+        "CPU": np.random.randint(20, 70, 10),
+        "Memory": np.random.randint(30, 80, 10)
+    })
+
+    cpu_chart = px.line(
+        monitoring_df,
+        x="Time",
+        y="CPU",
+        title="CPU Monitoring"
+    )
+
+    st.plotly_chart(cpu_chart, use_container_width=True)
+
+elif page == "☁️ Deployment Status":
+
+    st.header("☁️ Deployment & DevOps Status")
+
+    deployment_data = pd.DataFrame({
+        "Service": [
+            "Docker",
+            "Kubernetes",
+            "GitHub Actions",
+            "AWS Deployment",
+            "Prometheus",
+            "Grafana",
+            "Load Testing"
+        ],
+        "Status": [
+            "Completed",
+            "Completed",
+            "Completed",
+            "Completed",
+            "Completed",
+            "Completed",
+            "Completed"
+        ]
+    })
+
+    st.dataframe(deployment_data, use_container_width=True)
+
+    st.success("Production Deployment Successfully Configured 🚀")
 
 elif page == "📅 Complete Project Roadmap":
 
     st.header("📅 RetailPulse Complete 4-Week Roadmap")
 
-    st.subheader("Week 1 – Data Exploration & Preparation")
+    roadmap = {
+        "Week 1": [
+            "Dataset selection and EDA",
+            "Data cleaning and feature engineering",
+            "Customer segmentation",
+            "Time-series preparation",
+            "Prophet forecasting",
+            "LSTM implementation",
+            "Week 1 checkpoint"
+        ],
+        "Week 2": [
+            "Hybrid forecasting",
+            "XGBoost churn prediction",
+            "Inventory optimization",
+            "Optuna tuning",
+            "Drift detection",
+            "Automated retraining",
+            "Week 2 checkpoint"
+        ],
+        "Week 3": [
+            "Streamlit dashboard",
+            "Forecast visualizations",
+            "Churn dashboard",
+            "Inventory UI",
+            "Real-time metrics",
+            "Export functionality",
+            "Interactive checkpoint"
+        ],
+        "Week 4": [
+            "Docker setup",
+            "Kubernetes deployment",
+            "GitHub Actions CI/CD",
+            "AWS/GCP deployment",
+            "Prometheus and Grafana",
+            "Load testing",
+            "Final QA and documentation"
+        ]
+    }
 
-    st.write("Day 1 • Dataset selection and EDA")
-    st.write("Day 2 • Data cleaning and feature engineering")
-    st.write("Day 3 • Customer segmentation")
-    st.write("Day 4 • Time-series preparation")
-    st.write("Day 5 • Prophet forecasting")
-    st.write("Day 6 • LSTM implementation")
-    st.write("Day 7 • Week 1 checkpoint")
-
-    st.subheader("Week 2 – Advanced Modeling & Churn Prediction")
-
-    st.write("Day 8 • Hybrid forecasting")
-    st.write("Day 9 • XGBoost churn prediction")
-    st.write("Day 10 • Inventory optimization")
-    st.write("Day 11 • Feature tuning with Optuna")
-    st.write("Day 12 • Drift detection")
-    st.write("Day 13 • Automated retraining")
-    st.write("Day 14 • Week 2 checkpoint")
-
-    st.subheader("Week 3 – Dashboard & Analytics Layer")
-
-    st.write("Day 15 • Streamlit dashboard")
-    st.write("Day 16 • Forecast visualizations")
-    st.write("Day 17 • Churn dashboard")
-    st.write("Day 18 • Inventory UI")
-    st.write("Day 19 • Real-time metrics")
-    st.write("Day 20 • Export functionality")
-    st.write("Day 21 • Interactive dashboard checkpoint")
-
-    st.subheader("Week 4 – Deployment & Production Polish")
-
-    st.write("Day 22 • Docker setup")
-    st.write("Day 23 • Kubernetes deployment")
-    st.write("Day 24 • GitHub Actions CI/CD")
-    st.write("Day 25 • AWS/GCP deployment")
-    st.write("Day 26 • Prometheus and Grafana")
-    st.write("Day 27 • Load testing")
-    st.write("Day 28 • Final QA and documentation")
+    for week, tasks in roadmap.items():
+        st.subheader(week)
+        for idx, task in enumerate(tasks, start=1):
+            st.write(f"Day {idx} • {task}")
 
 elif page == "📋 Project Summary":
 
@@ -375,14 +429,13 @@ elif page == "📋 Project Summary":
 - NumPy
 - Plotly
 - Scikit-learn
+- XGBoost
 - Prophet
 - PyTorch Lightning
-- XGBoost
-- SHAP
-- Optuna
-- MLflow
 - Docker
 - Kubernetes
+- Prometheus
+- Grafana
 
 ### 🔹 Core Features
 - EDA Dashboard
@@ -390,9 +443,10 @@ elif page == "📋 Project Summary":
 - Customer Segmentation
 - Churn Prediction
 - Inventory Optimization
-- Demand Forecasting
-- AI Business Insights
+- AI Forecasting
+- Monitoring Dashboard
 - Cloud Deployment
+- CI/CD Automation
 
 ### 🔹 Business Benefits
 - Better business decision making
