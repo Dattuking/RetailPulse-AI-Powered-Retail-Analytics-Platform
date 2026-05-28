@@ -13,8 +13,8 @@ The project combines business intelligence with AI forecasting to provide action
 ## Live Demo
 
 🚀 **Streamlit Deployment**
-
-https://retailpulse-ai-customer-analytics-and-demand-forecasting-z9lmk.streamlit.app/
+[
+https://retailpulse-ai-customer-analytics-and-demand-forecasting-z9lmk.streamlit.app/](https://retailpulse-ai-powered-retail-analytics-platform-vl2brzefarcyv.streamlit.app/)
 
 ---
 
