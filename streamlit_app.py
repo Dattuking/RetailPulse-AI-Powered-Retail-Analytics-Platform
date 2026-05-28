@@ -34,11 +34,11 @@ st.markdown("""
 <style>
 
 .main {
-    background-color: red;
+    background-color: white;
 }
 
 h1, h2, h3 {
-    color: #1f2937;
+    color: red;
 }
 
 .stMetric {
