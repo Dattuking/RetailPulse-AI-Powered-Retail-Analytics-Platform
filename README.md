@@ -8,12 +8,12 @@
 
 <br>
 
-![Python](https://img.shields.io/badge/Python-3.11-blue?style=for-the-badge\&logo=python)
-![Streamlit](https://img.shields.io/badge/Streamlit-Dashboard-red?style=for-the-badge\&logo=streamlit)
-![Docker](https://img.shields.io/badge/Docker-Deployment-blue?style=for-the-badge\&logo=docker)
-![Kubernetes](https://img.shields.io/badge/Kubernetes-Orchestration-326CE5?style=for-the-badge\&logo=kubernetes)
-![AWS](https://img.shields.io/badge/AWS-Cloud-orange?style=for-the-badge\&logo=amazonaws)
-![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-CI/CD-success?style=for-the-badge\&logo=githubactions)
+![Python](https://img.shields.io/badge/Python-3.11-blue?style=for-the-badge&logo=python)
+![Streamlit](https://img.shields.io/badge/Streamlit-Dashboard-red?style=for-the-badge&logo=streamlit)
+![Docker](https://img.shields.io/badge/Docker-Deployment-blue?style=for-the-badge&logo=docker)
+![Kubernetes](https://img.shields.io/badge/Kubernetes-Orchestration-326CE5?style=for-the-badge&logo=kubernetes)
+![AWS](https://img.shields.io/badge/AWS-Cloud-orange?style=for-the-badge&logo=amazonaws)
+![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-CI/CD-success?style=for-the-badge&logo=githubactions)
 
 </div>
 
@@ -25,13 +25,13 @@ RetailPulse is a next-generation AI-powered retail analytics ecosystem designed 
 
 The platform enables retailers and businesses to:
 
-✅ Analyze customer behavior
-✅ Forecast future sales demand
-✅ Detect churn risks
-✅ Optimize inventory management
-✅ Generate AI-powered business insights
-✅ Monitor KPIs in real time
-✅ Deploy scalable cloud-native analytics solutions
+✅ Analyze customer behavior  
+✅ Forecast future sales demand  
+✅ Detect churn risks  
+✅ Optimize inventory management  
+✅ Generate AI-powered business insights  
+✅ Monitor KPIs in real time  
+✅ Deploy scalable cloud-native analytics solutions  
 
 RetailPulse combines:
 
@@ -53,7 +53,7 @@ The following diagram illustrates the complete end-to-end architecture of the Re
 
 <div align="center">
 
-![RetailPulse Architecture](images/retailpulse_architecture.png)
+<img src="images/project_overview.png" alt="RetailPulse Architecture" width="100%">
 
 </div>
 
@@ -67,7 +67,7 @@ The following diagram illustrates the complete end-to-end architecture of the Re
 
 ### 🔗 Live Application
 
-[https://retailpulse-ai-powered-retail-analytics-platform-vl2brzefarcyv.streamlit.app/](https://retailpulse-ai-powered-retail-analytics-platform-vl2brzefarcyv.streamlit.app/)
+https://retailpulse-ai-powered-retail-analytics-platform-vl2brzefarcyv.streamlit.app/
 
 </div>
 
@@ -79,7 +79,7 @@ The following diagram illustrates the complete end-to-end architecture of the Re
 
 ## 🔗 Source Code Repository
 
-[https://github.com/Dattuking/RetailPulse-AI-Powered-Retail-Analytics-Platform](https://github.com/Dattuking/RetailPulse-AI-Powered-Retail-Analytics-Platform)
+https://github.com/Dattuking/RetailPulse-AI-Powered-Retail-Analytics-Platform
 
 </div>
 
@@ -89,23 +89,23 @@ The following diagram illustrates the complete end-to-end architecture of the Re
 
 <div align="center">
 
-| 🚀 Feature                  | ✅ Status      |
-| --------------------------- | ------------- |
+| 🚀 Feature | ✅ Status |
+|---|---|
 | AI-Powered Retail Analytics | ✅ Implemented |
-| Interactive BI Dashboard    | ✅ Implemented |
-| Customer Segmentation       | ✅ Implemented |
-| Churn Prediction System     | ✅ Implemented |
-| Inventory Intelligence      | ✅ Implemented |
-| AI Demand Forecasting       | ✅ Implemented |
-| Explainable AI Insights     | ✅ Implemented |
-| Real-Time KPI Monitoring    | ✅ Implemented |
-| Dockerized Deployment       | ✅ Implemented |
-| Kubernetes Integration      | ✅ Implemented |
-| GitHub Actions CI/CD        | ✅ Implemented |
-| AWS/GCP Cloud Deployment    | ✅ Implemented |
-| Prometheus Monitoring       | ✅ Implemented |
-| Grafana Dashboard           | ✅ Implemented |
-| Load Testing & Validation   | ✅ Implemented |
+| Interactive BI Dashboard | ✅ Implemented |
+| Customer Segmentation | ✅ Implemented |
+| Churn Prediction System | ✅ Implemented |
+| Inventory Intelligence | ✅ Implemented |
+| AI Demand Forecasting | ✅ Implemented |
+| Explainable AI Insights | ✅ Implemented |
+| Real-Time KPI Monitoring | ✅ Implemented |
+| Dockerized Deployment | ✅ Implemented |
+| Kubernetes Integration | ✅ Implemented |
+| GitHub Actions CI/CD | ✅ Implemented |
+| AWS/GCP Cloud Deployment | ✅ Implemented |
+| Prometheus Monitoring | ✅ Implemented |
+| Grafana Dashboard | ✅ Implemented |
+| Load Testing & Validation | ✅ Implemented |
 
 </div>
 
@@ -117,20 +117,20 @@ RetailPulse consists of multiple intelligent analytical modules integrated into 
 
 ---
 
-| 📌 Module                | 📖 Description                             |
-| ------------------------ | ------------------------------------------ |
-| 🏠 Home Dashboard        | AI-powered business overview & KPI metrics |
-| 📊 EDA Dashboard         | Exploratory Data Analysis & trends         |
-| 📈 Sales Analysis        | Revenue, customer & profit monitoring      |
-| 👥 Customer Segmentation | ML clustering & customer profiling         |
-| ⚠️ Churn Analysis        | Customer retention & churn prediction      |
-| 📦 Inventory Insights    | Smart inventory optimization               |
-| 🤖 Sales Forecasting     | AI demand forecasting system               |
-| 💡 AI Business Insights  | Strategic AI-generated recommendations     |
-| 📡 Monitoring Dashboard  | Real-time infrastructure monitoring        |
-| ☁️ Deployment Status     | DevOps & deployment tracking               |
-| 📅 Project Roadmap       | Complete implementation lifecycle          |
-| 📋 Project Summary       | Technologies & business value              |
+| 📌 Module | 📖 Description |
+|---|---|
+| 🏠 Home Dashboard | AI-powered business overview & KPI metrics |
+| 📊 EDA Dashboard | Exploratory Data Analysis & trends |
+| 📈 Sales Analysis | Revenue, customer & profit monitoring |
+| 👥 Customer Segmentation | ML clustering & customer profiling |
+| ⚠️ Churn Analysis | Customer retention & churn prediction |
+| 📦 Inventory Insights | Smart inventory optimization |
+| 🤖 Sales Forecasting | AI demand forecasting system |
+| 💡 AI Business Insights | Strategic AI-generated recommendations |
+| 📡 Monitoring Dashboard | Real-time infrastructure monitoring |
+| ☁️ Deployment Status | DevOps & deployment tracking |
+| 📅 Project Roadmap | Complete implementation lifecycle |
+| 📋 Project Summary | Technologies & business value |
 
 ---
 
@@ -140,7 +140,7 @@ The following workflow diagram represents the internal navigation flow, dashboar
 
 <div align="center">
 
-![RetailPulse Workflow](images/retailpulse_workflow.png)
+<img src="images/workflow.png" alt="RetailPulse Workflow" width="100%">
 
 </div>
 
@@ -156,13 +156,13 @@ RetailPulse performs intelligent retail data exploration and preprocessing.
 
 ### Features
 
-✅ Data preprocessing
-✅ Missing value handling
-✅ Statistical analysis
-✅ Correlation heatmaps
-✅ Interactive visualizations
-✅ Sales trend analytics
-✅ Customer activity analysis
+✅ Data preprocessing  
+✅ Missing value handling  
+✅ Statistical analysis  
+✅ Correlation heatmaps  
+✅ Interactive visualizations  
+✅ Sales trend analytics  
+✅ Customer activity analysis  
 
 ---
 
@@ -172,12 +172,12 @@ Advanced business intelligence dashboards for sales performance monitoring.
 
 ### Features
 
-✅ Revenue tracking
-✅ Profit analytics
-✅ Daily sales monitoring
-✅ KPI visualization
-✅ Customer growth analytics
-✅ Interactive Plotly charts
+✅ Revenue tracking  
+✅ Profit analytics  
+✅ Daily sales monitoring  
+✅ KPI visualization  
+✅ Customer growth analytics  
+✅ Interactive Plotly charts  
 
 ---
 
@@ -187,12 +187,12 @@ Machine Learning-powered customer clustering and behavioral profiling.
 
 ### Techniques Implemented
 
-✅ RFM Analysis
-✅ K-Means Clustering
-✅ DBSCAN Clustering
-✅ Behavioral Analytics
-✅ Customer Profiling
-✅ Segmentation Visualization
+✅ RFM Analysis  
+✅ K-Means Clustering  
+✅ DBSCAN Clustering  
+✅ Behavioral Analytics  
+✅ Customer Profiling  
+✅ Segmentation Visualization  
 
 ---
 
@@ -202,11 +202,11 @@ AI-powered customer churn prediction system using explainable machine learning.
 
 ### Features
 
-✅ XGBoost churn modeling
-✅ SHAP explainability
-✅ Customer risk scoring
-✅ Retention analytics
-✅ Churn trend monitoring
+✅ XGBoost churn modeling  
+✅ SHAP explainability  
+✅ Customer risk scoring  
+✅ Retention analytics  
+✅ Churn trend monitoring  
 
 ---
 
@@ -216,11 +216,11 @@ Smart inventory optimization and warehouse intelligence engine.
 
 ### Features
 
-✅ Inventory forecasting
-✅ Demand-driven restocking
-✅ Warehouse analytics
-✅ Stock optimization
-✅ Supply chain insights
+✅ Inventory forecasting  
+✅ Demand-driven restocking  
+✅ Warehouse analytics  
+✅ Stock optimization  
+✅ Supply chain insights  
 
 ---
 
@@ -230,11 +230,11 @@ Deep Learning and forecasting-based future demand prediction system.
 
 ### Models Used
 
-✅ Prophet Forecasting
-✅ LSTM Forecasting
-✅ Hybrid Forecasting Models
-✅ Time-Series Prediction
-✅ Demand Trend Analysis
+✅ Prophet Forecasting  
+✅ LSTM Forecasting  
+✅ Hybrid Forecasting Models  
+✅ Time-Series Prediction  
+✅ Demand Trend Analysis  
 
 ---
 
@@ -359,12 +359,12 @@ sudo docker run -d -p 8501:8501 retailpulse
 
 RetailPulse includes production-grade monitoring capabilities.
 
-✅ Real-time metrics monitoring
-✅ Infrastructure observability
-✅ CPU & memory analytics
-✅ KPI monitoring dashboards
-✅ Performance tracking
-✅ Real-time health monitoring
+✅ Real-time metrics monitoring  
+✅ Infrastructure observability  
+✅ CPU & memory analytics  
+✅ KPI monitoring dashboards  
+✅ Performance tracking  
+✅ Real-time health monitoring  
 
 ---
 
@@ -511,8 +511,8 @@ class RetailPulseUser(HttpUser):
 RetailPulse/
 │
 ├── images/
-│   ├── retailpulse_architecture.png
-│   └── retailpulse_workflow.png
+│   ├── project_overview.png
+│   └── workflow.png
 │
 ├── streamlit_app.py
 ├── requirements.txt
@@ -600,14 +600,14 @@ kubectl apply -f kubernetes/
 
 RetailPulse empowers businesses to:
 
-✅ Improve customer retention
-✅ Understand customer purchasing behavior
-✅ Forecast future sales demand
-✅ Optimize inventory management
-✅ Reduce operational costs
-✅ Improve strategic planning
-✅ Enable AI-driven decision making
-✅ Scale analytics infrastructure efficiently
+✅ Improve customer retention  
+✅ Understand customer purchasing behavior  
+✅ Forecast future sales demand  
+✅ Optimize inventory management  
+✅ Reduce operational costs  
+✅ Improve strategic planning  
+✅ Enable AI-driven decision making  
+✅ Scale analytics infrastructure efficiently  
 
 ---
 
