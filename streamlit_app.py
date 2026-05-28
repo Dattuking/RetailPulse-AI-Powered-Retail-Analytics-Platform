@@ -173,6 +173,7 @@ if page == "🏠 Home":
     <div style="
     background-color:#2563eb;
     padding:14px;
+    color:red;
     border-radius:12px;
     margin-bottom:15px;
     ">
