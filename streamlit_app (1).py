@@ -25,35 +25,47 @@ h1, h2, h3 {
 .stMetric {
     background-color: white;
     padding: 15px;
-    border-radius: 10px;
+    border-radius: 12px;
     border: 1px solid #e5e7eb;
+    box-shadow: 0px 2px 5px rgba(0,0,0,0.05);
 }
 
 .block-container {
     padding-top: 2rem;
 }
+
+.sidebar .sidebar-content {
+    background-color: #111827;
+}
+
+.css-1d391kg {
+    background-color: #111827;
+}
 </style>
 """, unsafe_allow_html=True)
 
-st.title("🛍️ RetailPulse – AI Powered Retail Analytics Platform")
+st.title("🛍️ RetailPulse – AI Powered Customer Analytics & Demand Forecasting Platform")
 
 st.markdown("""
-RetailPulse is an end-to-end AI-powered retail analytics platform developed using Python, Streamlit, Machine Learning, and Data Analytics techniques.
+RetailPulse is an end-to-end AI-powered retail analytics platform developed using Python, Streamlit, Machine Learning, Deep Learning, and Data Analytics techniques.
 """)
 
-st.success("Platform Loaded Successfully 🚀")
+st.success("RetailPulse Platform Successfully Loaded 🚀")
 
-st.sidebar.title("📌 Navigation")
+st.sidebar.title("📌 RetailPulse Navigation")
 
 page = st.sidebar.radio(
-    "Select Dashboard Section",
+    "Select Module",
     [
         "Overview",
-        "Sales Analytics",
-        "Customer Insights",
+        "Week 1",
+        "Week 2",
+        "Week 3",
+        "Week 4",
+        "Analytics Dashboard",
+        "Forecasting",
+        "Customer Segmentation",
         "Inventory Monitoring",
-        "Demand Forecasting",
-        "Deployment Roadmap",
         "Project Summary"
     ]
 )
@@ -104,158 +116,272 @@ if page == "Overview":
 
     st.markdown("---")
 
-    st.subheader("📊 Daily Sales Trend")
-
     fig = px.line(
         sales_data,
         x="Date",
         y="Sales",
         markers=True,
-        title="Daily Sales Analysis"
+        title="Daily Sales Trend"
     )
 
     st.plotly_chart(fig, use_container_width=True)
 
-    st.subheader("💰 Profit Analysis")
+    st.subheader("💡 Platform Highlights")
 
-    profit_fig = px.bar(
-        sales_data,
-        x="Date",
-        y="Profit",
-        title="Profit Distribution"
-    )
+    highlights = [
+        "AI-Powered Retail Analytics",
+        "Customer Behavior Intelligence",
+        "Demand Forecasting Models",
+        "Inventory Optimization",
+        "Churn Prediction",
+        "Interactive Dashboards"
+    ]
 
-    st.plotly_chart(profit_fig, use_container_width=True)
+    for item in highlights:
+        st.write(f"• {item}")
 
-elif page == "Sales Analytics":
+elif page == "Week 1":
 
-    st.header("📊 Sales Analytics Dashboard")
+    st.header("📅 Week 1 – Data Exploration & Preparation")
+
+    week1 = {
+        "Day 1": [
+            "Dataset selection (retail sales, customer, inventory data)",
+            "Initial EDA notebook: distribution analysis, missing values, correlation heatmap"
+        ],
+        "Day 2": [
+            "Data cleaning and feature engineering (RFM scores, rolling statistics)",
+            "Data validation with Great Expectations"
+        ],
+        "Day 3": [
+            "Customer segmentation using K-Means and DBSCAN",
+            "Cluster evaluation and business interpretation"
+        ],
+        "Day 4": [
+            "Time-series data preparation for forecasting",
+            "Stationarity tests and decomposition"
+        ],
+        "Day 5": [
+            "Baseline Prophet model for demand forecasting"
+        ],
+        "Day 6": [
+            "LSTM model implementation with PyTorch Lightning"
+        ],
+        "Day 7": [
+            "Week 1 checkpoint: EDA report, cleaned dataset, baseline models logged in MLflow"
+        ]
+    }
+
+    for day, tasks in week1.items():
+        st.subheader(day)
+        for task in tasks:
+            st.write(f"• {task}")
+
+elif page == "Week 2":
+
+    st.header("📅 Week 2 – Advanced Modeling & Churn Prediction")
+
+    week2 = {
+        "Day 8": [
+            "Hybrid forecasting model (Prophet + LSTM ensemble)"
+        ],
+        "Day 9": [
+            "Churn prediction model using XGBoost with SHAP explainability"
+        ],
+        "Day 10": [
+            "Inventory optimization logic using forecasted demand"
+        ],
+        "Day 11": [
+            "Feature importance analysis and model tuning with Optuna"
+        ],
+        "Day 12": [
+            "Drift detection setup using Evidently AI"
+        ],
+        "Day 13": [
+            "Automated retraining pipeline with Airflow"
+        ],
+        "Day 14": [
+            "Week 2 checkpoint: Forecasting and churn models ready, optimization logic implemented"
+        ]
+    }
+
+    for day, tasks in week2.items():
+        st.subheader(day)
+        for task in tasks:
+            st.write(f"• {task}")
+
+elif page == "Week 3":
+
+    st.header("📅 Week 3 – Dashboard & Analytics Layer")
+
+    week3 = {
+        "Day 15": [
+            "Streamlit dashboard skeleton with multi-page layout"
+        ],
+        "Day 16": [
+            "Demand forecasting visualizations and what-if analysis"
+        ],
+        "Day 17": [
+            "Customer segmentation and churn risk dashboard"
+        ],
+        "Day 18": [
+            "Inventory optimization recommendations UI"
+        ],
+        "Day 19": [
+            "Real-time metrics and alerts"
+        ],
+        "Day 20": [
+            "Export functionality (CSV/PDF reports)"
+        ],
+        "Day 21": [
+            "Week 3 checkpoint: Fully interactive dashboard with all insights"
+        ]
+    }
+
+    for day, tasks in week3.items():
+        st.subheader(day)
+        for task in tasks:
+            st.write(f"• {task}")
+
+elif page == "Week 4":
+
+    st.header("📅 Week 4 – Deployment & Production Polish")
+
+    week4 = {
+        "Day 22": [
+            "Docker multi-stage builds for the application"
+        ],
+        "Day 23": [
+            "Kubernetes manifests and deployment configuration"
+        ],
+        "Day 24": [
+            "GitHub Actions CI/CD pipeline"
+        ],
+        "Day 25": [
+            "Cloud deployment on AWS or GCP"
+        ],
+        "Day 26": [
+            "Monitoring setup with Prometheus and Grafana"
+        ],
+        "Day 27": [
+            "Load testing and final accuracy validation"
+        ],
+        "Day 28": [
+            "Final QA, README polishing, demo video recording, PDF export"
+        ]
+    }
+
+    for day, tasks in week4.items():
+        st.subheader(day)
+        for task in tasks:
+            st.write(f"• {task}")
+
+elif page == "Analytics Dashboard":
+
+    st.header("📊 Retail Analytics Dashboard")
 
     st.dataframe(sales_data, use_container_width=True)
 
-    fig = go.Figure()
-
-    fig.add_trace(go.Scatter(
-        x=sales_data["Date"],
-        y=sales_data["Sales"],
-        mode='lines+markers',
-        name='Sales'
-    ))
-
-    fig.update_layout(
-        title="Sales Performance",
-        xaxis_title="Date",
-        yaxis_title="Sales"
+    sales_chart = px.bar(
+        sales_data,
+        x="Date",
+        y="Sales",
+        title="Retail Sales Analysis"
     )
 
-    st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(sales_chart, use_container_width=True)
 
-    st.subheader("📌 Key Insights")
-
-    st.write("• Peak sales observed during weekends")
-    st.write("• Consistent upward business growth")
-    st.write("• Increased customer engagement")
-
-elif page == "Customer Insights":
-
-    st.header("👥 Customer Segmentation")
-
-    pie_chart = px.pie(
-        customer_segments,
-        names="Segment",
-        values="Customers",
-        title="Customer Segmentation Analysis"
+    profit_chart = px.line(
+        sales_data,
+        x="Date",
+        y="Profit",
+        markers=True,
+        title="Profit Trend"
     )
 
-    st.plotly_chart(pie_chart, use_container_width=True)
+    st.plotly_chart(profit_chart, use_container_width=True)
 
-    st.subheader("📌 Customer Insights")
+elif page == "Forecasting":
 
-    st.write("• Premium customers contribute highest revenue")
-    st.write("• Regular users form the majority customer base")
-    st.write("• New customer acquisition increasing steadily")
-
-elif page == "Inventory Monitoring":
-
-    st.header("📦 Inventory Monitoring System")
-
-    inventory_chart = px.bar(
-        inventory_data,
-        x="Category",
-        y="Stock",
-        color="Category",
-        title="Current Inventory Status"
-    )
-
-    st.plotly_chart(inventory_chart, use_container_width=True)
-
-    st.subheader("📌 Inventory Insights")
-
-    st.write("• Electronics inventory requires restocking")
-    st.write("• Groceries category has highest stock")
-    st.write("• Furniture stock is comparatively low")
-
-elif page == "Demand Forecasting":
-
-    st.header("🤖 AI-Based Demand Forecasting")
+    st.header("🤖 AI Demand Forecasting")
 
     forecast_chart = px.line(
         forecast_data,
         x="Month",
         y="Predicted Sales",
         markers=True,
-        title="Future Sales Prediction"
+        title="Demand Forecasting Results"
     )
 
     st.plotly_chart(forecast_chart, use_container_width=True)
 
-    st.subheader("📌 Forecast Insights")
+    st.subheader("📌 Forecasting Models Used")
 
-    st.write("• Predicted sales show steady growth")
-    st.write("• AI forecasting helps optimize inventory")
-    st.write("• Business demand expected to rise significantly")
+    st.write("• Prophet Forecasting")
+    st.write("• LSTM Deep Learning")
+    st.write("• Hybrid Prophet + LSTM Ensemble")
 
-elif page == "Deployment Roadmap":
+elif page == "Customer Segmentation":
 
-    st.header("🚀 Week 4 – Deployment & Production Polish")
+    st.header("👥 Customer Segmentation & Churn Analysis")
 
-    roadmap = {
-        "Day 22": "Docker multi-stage builds for the application",
-        "Day 23": "Kubernetes manifests and deployment configuration",
-        "Day 24": "GitHub Actions CI/CD pipeline",
-        "Day 25": "Cloud deployment on AWS or GCP",
-        "Day 26": "Monitoring setup with Prometheus and Grafana",
-        "Day 27": "Load testing and final accuracy validation",
-        "Day 28": "Final QA, README polishing, demo video recording, PDF export"
-    }
+    segment_chart = px.pie(
+        customer_segments,
+        names="Segment",
+        values="Customers",
+        title="Customer Segments"
+    )
 
-    for day, task in roadmap.items():
-        st.subheader(day)
-        st.write(f"• {task}")
+    st.plotly_chart(segment_chart, use_container_width=True)
 
-    st.markdown("---")
+    st.subheader("📌 Segmentation Models")
 
-    st.success("Deployment pipeline successfully integrated.")
+    st.write("• K-Means Clustering")
+    st.write("• DBSCAN Clustering")
+    st.write("• XGBoost Churn Prediction")
+    st.write("• SHAP Explainability")
+
+elif page == "Inventory Monitoring":
+
+    st.header("📦 Inventory Optimization Dashboard")
+
+    inventory_chart = px.bar(
+        inventory_data,
+        x="Category",
+        y="Stock",
+        color="Category",
+        title="Inventory Monitoring"
+    )
+
+    st.plotly_chart(inventory_chart, use_container_width=True)
+
+    st.subheader("📌 Inventory Features")
+
+    st.write("• AI Inventory Optimization")
+    st.write("• Demand-Based Restocking")
+    st.write("• Real-Time Alerts")
+    st.write("• Inventory Forecasting")
 
 elif page == "Project Summary":
 
-    st.header("📋 Project Summary")
+    st.header("📋 Complete Project Summary")
 
     st.markdown("""
-### 🔹 Core Modules
-- Sales Analytics
-- Customer Segmentation
-- Inventory Monitoring
-- Demand Forecasting
-- AI-Based Insights
-
 ### 🔹 Technologies Used
 - Python
 - Streamlit
 - Pandas
 - NumPy
 - Plotly
-- Machine Learning
+- Scikit-learn
+- Prophet
+- PyTorch Lightning
+- XGBoost
+- SHAP
+- Optuna
+- Evidently AI
+- Airflow
+- MLflow
 
 ### 🔹 Deployment Technologies
 - Docker
@@ -265,15 +391,25 @@ elif page == "Project Summary":
 - Prometheus
 - Grafana
 
+### 🔹 Core Features
+- Retail Analytics
+- Customer Segmentation
+- Churn Prediction
+- Demand Forecasting
+- Inventory Optimization
+- Real-Time Monitoring
+- Export Reports
+- Interactive Dashboard
+
 ### 🔹 Business Benefits
-- Improved retail decision making
-- Better customer understanding
+- Better retail decision making
+- Improved customer retention
 - Accurate sales forecasting
-- Efficient inventory management
-- AI-driven business intelligence
+- Inventory cost reduction
+- AI-powered business intelligence
 """)
 
-    st.info("RetailPulse AI Platform Ready for Production Deployment 🚀")
+    st.success("RetailPulse Production Deployment Ready 🚀")
 
 st.markdown("---")
 
