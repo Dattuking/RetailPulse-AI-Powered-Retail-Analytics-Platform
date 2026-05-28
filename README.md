@@ -24,9 +24,7 @@ https://retailpulse-ai-customer-analytics-and-demand-forecasting-z9lmk.streamlit
 
 https://github.com/Dattuking/ZIDIO-GROUP-3
 
-🔗 **Original Development Repository**
 
-https://github.com/laharisetty29/RetailPulse-AI-Customer-Analytics-and-Demand-Forecasting
 
 ---
 
