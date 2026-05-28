@@ -18,7 +18,7 @@ https://retailpulse-ai-customer-analytics-and-demand-forecasting-z9lmk.streamlit
 
 🔗 GitHub Repo:
 
-https://github.com/laharisetty29/RetailPulse-AI-Customer-Analytics-and-Demand-Forecasting
+[https://github.com/laharisetty29/RetailPulse-AI-Customer-Analytics-and-Demand-Forecasting](https://github.com/Dattuking/ZIDIO-GROUP-3)
 
 ---
 
@@ -118,7 +118,7 @@ RetailPulse/
 ## Installation
 ### Clone the repository:
 ```bash
-git clone https://github.com/laharisetty29/RetailPulse-AI-Customer-Analytics-and-Demand-Forecasting.git
+git clone https://github.com/Dattuking/ZIDIO-GROUP-3.git
 ```
 ### Move into the project folder:
 ```bash
@@ -161,7 +161,7 @@ The project provides:
 
 ## Author
 
-Gadamsetty Lahari
+Venkata Datta Sai Krishna Kona
 
 ---
 
