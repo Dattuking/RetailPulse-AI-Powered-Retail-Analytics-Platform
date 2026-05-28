@@ -14,6 +14,7 @@ st.set_page_config(
 
 st.markdown("""
 <style>
+
 .main {
     background-color: #f5f7fa;
 }
@@ -34,20 +35,13 @@ h1, h2, h3 {
     padding-top: 2rem;
 }
 
-.sidebar .sidebar-content {
-    background-color: #111827;
-}
-
-.css-1d391kg {
-    background-color: #111827;
-}
 </style>
 """, unsafe_allow_html=True)
 
-st.title("🛍️ RetailPulse – AI Powered Customer Analytics & Demand Forecasting Platform")
+st.title("🛍️ RetailPulse – AI Powered Retail Analytics Platform")
 
 st.markdown("""
-RetailPulse is an end-to-end AI-powered retail analytics platform developed using Python, Streamlit, Machine Learning, Deep Learning, and Data Analytics techniques.
+RetailPulse is an end-to-end AI-powered customer analytics and demand forecasting platform developed using Python, Streamlit, Machine Learning, Deep Learning, and Data Analytics.
 """)
 
 st.success("RetailPulse Platform Successfully Loaded 🚀")
@@ -57,16 +51,13 @@ st.sidebar.title("📌 RetailPulse Navigation")
 page = st.sidebar.radio(
     "Select Module",
     [
-        "Overview",
-        "Week 1",
-        "Week 2",
-        "Week 3",
-        "Week 4",
-        "Analytics Dashboard",
-        "Forecasting",
-        "Customer Segmentation",
-        "Inventory Monitoring",
-        "Project Summary"
+        "🏠 Overview",
+        "📅 Complete Project Roadmap",
+        "📊 Analytics Dashboard",
+        "🤖 Demand Forecasting",
+        "👥 Customer Segmentation",
+        "📦 Inventory Monitoring",
+        "📋 Project Summary"
     ]
 )
 
@@ -96,7 +87,7 @@ forecast_data = pd.DataFrame({
     "Predicted Sales": [12000, 15000, 17000, 21000, 24000, 26000]
 })
 
-if page == "Overview":
+if page == "🏠 Overview":
 
     st.header("📈 Business Overview")
 
@@ -116,7 +107,7 @@ if page == "Overview":
 
     st.markdown("---")
 
-    fig = px.line(
+    sales_chart = px.line(
         sales_data,
         x="Date",
         y="Sales",
@@ -124,7 +115,7 @@ if page == "Overview":
         title="Daily Sales Trend"
     )
 
-    st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(sales_chart, use_container_width=True)
 
     st.subheader("💡 Platform Highlights")
 
@@ -134,149 +125,162 @@ if page == "Overview":
         "Demand Forecasting Models",
         "Inventory Optimization",
         "Churn Prediction",
-        "Interactive Dashboards"
+        "Interactive Dashboards",
+        "Cloud Deployment Ready",
+        "Real-Time Monitoring"
     ]
 
     for item in highlights:
         st.write(f"• {item}")
 
-elif page == "Week 1":
+elif page == "📅 Complete Project Roadmap":
 
-    st.header("📅 Week 1 – Data Exploration & Preparation")
+    st.header("📅 RetailPulse – Complete 4 Week Development Roadmap")
 
-    week1 = {
-        "Day 1": [
-            "Dataset selection (retail sales, customer, inventory data)",
-            "Initial EDA notebook: distribution analysis, missing values, correlation heatmap"
-        ],
-        "Day 2": [
-            "Data cleaning and feature engineering (RFM scores, rolling statistics)",
-            "Data validation with Great Expectations"
-        ],
-        "Day 3": [
-            "Customer segmentation using K-Means and DBSCAN",
-            "Cluster evaluation and business interpretation"
-        ],
-        "Day 4": [
-            "Time-series data preparation for forecasting",
-            "Stationarity tests and decomposition"
-        ],
-        "Day 5": [
-            "Baseline Prophet model for demand forecasting"
-        ],
-        "Day 6": [
-            "LSTM model implementation with PyTorch Lightning"
-        ],
-        "Day 7": [
-            "Week 1 checkpoint: EDA report, cleaned dataset, baseline models logged in MLflow"
-        ]
+    roadmap = {
+
+        "Week 1 – Data Exploration & Preparation": {
+
+            "Day 1": [
+                "Dataset selection (retail sales, customer, inventory data)",
+                "Initial EDA notebook: distribution analysis, missing values, correlation heatmap"
+            ],
+
+            "Day 2": [
+                "Data cleaning and feature engineering (RFM scores, rolling statistics)",
+                "Data validation with Great Expectations"
+            ],
+
+            "Day 3": [
+                "Customer segmentation using K-Means and DBSCAN",
+                "Cluster evaluation and business interpretation"
+            ],
+
+            "Day 4": [
+                "Time-series data preparation for forecasting",
+                "Stationarity tests and decomposition"
+            ],
+
+            "Day 5": [
+                "Baseline Prophet model for demand forecasting"
+            ],
+
+            "Day 6": [
+                "LSTM model implementation with PyTorch Lightning"
+            ],
+
+            "Day 7": [
+                "Week 1 checkpoint: EDA report, cleaned dataset, baseline models logged in MLflow"
+            ]
+        },
+
+        "Week 2 – Advanced Modeling & Churn Prediction": {
+
+            "Day 8": [
+                "Hybrid forecasting model (Prophet + LSTM ensemble)"
+            ],
+
+            "Day 9": [
+                "Churn prediction model using XGBoost with SHAP explainability"
+            ],
+
+            "Day 10": [
+                "Inventory optimization logic using forecasted demand"
+            ],
+
+            "Day 11": [
+                "Feature importance analysis and model tuning with Optuna"
+            ],
+
+            "Day 12": [
+                "Drift detection setup using Evidently AI"
+            ],
+
+            "Day 13": [
+                "Automated retraining pipeline with Airflow"
+            ],
+
+            "Day 14": [
+                "Week 2 checkpoint: Forecasting and churn models ready, optimization logic implemented"
+            ]
+        },
+
+        "Week 3 – Dashboard & Analytics Layer": {
+
+            "Day 15": [
+                "Streamlit dashboard skeleton with multi-page layout"
+            ],
+
+            "Day 16": [
+                "Demand forecasting visualizations and what-if analysis"
+            ],
+
+            "Day 17": [
+                "Customer segmentation and churn risk dashboard"
+            ],
+
+            "Day 18": [
+                "Inventory optimization recommendations UI"
+            ],
+
+            "Day 19": [
+                "Real-time metrics and alerts"
+            ],
+
+            "Day 20": [
+                "Export functionality (CSV/PDF reports)"
+            ],
+
+            "Day 21": [
+                "Week 3 checkpoint: Fully interactive dashboard with all insights"
+            ]
+        },
+
+        "Week 4 – Deployment & Production Polish": {
+
+            "Day 22": [
+                "Docker multi-stage builds for the application"
+            ],
+
+            "Day 23": [
+                "Kubernetes manifests and deployment configuration"
+            ],
+
+            "Day 24": [
+                "GitHub Actions CI/CD pipeline"
+            ],
+
+            "Day 25": [
+                "Cloud deployment on AWS or GCP"
+            ],
+
+            "Day 26": [
+                "Monitoring setup with Prometheus and Grafana"
+            ],
+
+            "Day 27": [
+                "Load testing and final accuracy validation"
+            ],
+
+            "Day 28": [
+                "Final QA, README polishing, demo video recording, PDF export"
+            ]
+        }
     }
 
-    for day, tasks in week1.items():
-        st.subheader(day)
-        for task in tasks:
-            st.write(f"• {task}")
+    for week, days in roadmap.items():
 
-elif page == "Week 2":
+        st.markdown("---")
+        st.subheader(week)
 
-    st.header("📅 Week 2 – Advanced Modeling & Churn Prediction")
+        for day, tasks in days.items():
 
-    week2 = {
-        "Day 8": [
-            "Hybrid forecasting model (Prophet + LSTM ensemble)"
-        ],
-        "Day 9": [
-            "Churn prediction model using XGBoost with SHAP explainability"
-        ],
-        "Day 10": [
-            "Inventory optimization logic using forecasted demand"
-        ],
-        "Day 11": [
-            "Feature importance analysis and model tuning with Optuna"
-        ],
-        "Day 12": [
-            "Drift detection setup using Evidently AI"
-        ],
-        "Day 13": [
-            "Automated retraining pipeline with Airflow"
-        ],
-        "Day 14": [
-            "Week 2 checkpoint: Forecasting and churn models ready, optimization logic implemented"
-        ]
-    }
+            st.markdown(f"### {day}")
 
-    for day, tasks in week2.items():
-        st.subheader(day)
-        for task in tasks:
-            st.write(f"• {task}")
+            for task in tasks:
+                st.write(f"• {task}")
 
-elif page == "Week 3":
-
-    st.header("📅 Week 3 – Dashboard & Analytics Layer")
-
-    week3 = {
-        "Day 15": [
-            "Streamlit dashboard skeleton with multi-page layout"
-        ],
-        "Day 16": [
-            "Demand forecasting visualizations and what-if analysis"
-        ],
-        "Day 17": [
-            "Customer segmentation and churn risk dashboard"
-        ],
-        "Day 18": [
-            "Inventory optimization recommendations UI"
-        ],
-        "Day 19": [
-            "Real-time metrics and alerts"
-        ],
-        "Day 20": [
-            "Export functionality (CSV/PDF reports)"
-        ],
-        "Day 21": [
-            "Week 3 checkpoint: Fully interactive dashboard with all insights"
-        ]
-    }
-
-    for day, tasks in week3.items():
-        st.subheader(day)
-        for task in tasks:
-            st.write(f"• {task}")
-
-elif page == "Week 4":
-
-    st.header("📅 Week 4 – Deployment & Production Polish")
-
-    week4 = {
-        "Day 22": [
-            "Docker multi-stage builds for the application"
-        ],
-        "Day 23": [
-            "Kubernetes manifests and deployment configuration"
-        ],
-        "Day 24": [
-            "GitHub Actions CI/CD pipeline"
-        ],
-        "Day 25": [
-            "Cloud deployment on AWS or GCP"
-        ],
-        "Day 26": [
-            "Monitoring setup with Prometheus and Grafana"
-        ],
-        "Day 27": [
-            "Load testing and final accuracy validation"
-        ],
-        "Day 28": [
-            "Final QA, README polishing, demo video recording, PDF export"
-        ]
-    }
-
-    for day, tasks in week4.items():
-        st.subheader(day)
-        for task in tasks:
-            st.write(f"• {task}")
-
-elif page == "Analytics Dashboard":
+elif page == "📊 Analytics Dashboard":
 
     st.header("📊 Retail Analytics Dashboard")
 
@@ -301,7 +305,17 @@ elif page == "Analytics Dashboard":
 
     st.plotly_chart(profit_chart, use_container_width=True)
 
-elif page == "Forecasting":
+    customer_chart = px.line(
+        sales_data,
+        x="Date",
+        y="Customers",
+        markers=True,
+        title="Customer Activity"
+    )
+
+    st.plotly_chart(customer_chart, use_container_width=True)
+
+elif page == "🤖 Demand Forecasting":
 
     st.header("🤖 AI Demand Forecasting")
 
@@ -318,10 +332,12 @@ elif page == "Forecasting":
     st.subheader("📌 Forecasting Models Used")
 
     st.write("• Prophet Forecasting")
-    st.write("• LSTM Deep Learning")
+    st.write("• LSTM Forecasting")
     st.write("• Hybrid Prophet + LSTM Ensemble")
+    st.write("• Time Series Analysis")
+    st.write("• What-if Analysis")
 
-elif page == "Customer Segmentation":
+elif page == "👥 Customer Segmentation":
 
     st.header("👥 Customer Segmentation & Churn Analysis")
 
@@ -340,8 +356,9 @@ elif page == "Customer Segmentation":
     st.write("• DBSCAN Clustering")
     st.write("• XGBoost Churn Prediction")
     st.write("• SHAP Explainability")
+    st.write("• Customer Risk Profiling")
 
-elif page == "Inventory Monitoring":
+elif page == "📦 Inventory Monitoring":
 
     st.header("📦 Inventory Optimization Dashboard")
 
@@ -357,14 +374,15 @@ elif page == "Inventory Monitoring":
 
     st.subheader("📌 Inventory Features")
 
-    st.write("• AI Inventory Optimization")
+    st.write("• Inventory Optimization")
     st.write("• Demand-Based Restocking")
     st.write("• Real-Time Alerts")
     st.write("• Inventory Forecasting")
+    st.write("• Warehouse Analytics")
 
-elif page == "Project Summary":
+elif page == "📋 Project Summary":
 
-    st.header("📋 Complete Project Summary")
+    st.header("📋 RetailPulse Project Summary")
 
     st.markdown("""
 ### 🔹 Technologies Used
@@ -413,4 +431,6 @@ elif page == "Project Summary":
 
 st.markdown("---")
 
-st.caption(f"RetailPulse Dashboard • Generated on {datetime.now().strftime('%d %B %Y %H:%M:%S')}")
+st.caption(
+    f"RetailPulse Dashboard • Generated on {datetime.now().strftime('%d %B %Y %H:%M:%S')}"
+)
