@@ -2,16 +2,26 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import plotly.express as px
-import plotly.graph_objects as go
 from datetime import datetime
-import os
-from prometheus_client import Counter, Gauge
 
-REQUEST_COUNT = Counter('retailpulse_requests_total', 'Total App Requests')
-ACTIVE_USERS = Gauge('retailpulse_active_users', 'Active Users')
+try:
+    from prometheus_client import Counter, Gauge
 
-REQUEST_COUNT.inc()
-ACTIVE_USERS.set(1)
+    REQUEST_COUNT = Counter(
+        'retailpulse_requests_total',
+        'Total App Requests'
+    )
+
+    ACTIVE_USERS = Gauge(
+        'retailpulse_active_users',
+        'Active Users'
+    )
+
+    REQUEST_COUNT.inc()
+    ACTIVE_USERS.set(1)
+
+except:
+    pass
 
 st.set_page_config(
     page_title="RetailPulse Dashboard",
@@ -41,10 +51,6 @@ h1, h2, h3 {
 
 .block-container {
     padding-top: 2rem;
-}
-
-.sidebar .sidebar-content {
-    background-color: #111827;
 }
 
 </style>
@@ -80,7 +86,10 @@ page = st.sidebar.radio(
 
 np.random.seed(42)
 
-dates = pd.date_range(start="2025-01-01", periods=30)
+dates = pd.date_range(
+    start="2025-01-01",
+    periods=30
+)
 
 sales_data = pd.DataFrame({
     "Date": dates,
@@ -90,23 +99,71 @@ sales_data = pd.DataFrame({
 })
 
 customer_segments = pd.DataFrame({
-    "Segment": ["Premium", "Regular", "Occasional", "New"],
-    "Customers": [320, 540, 280, 150]
+    "Segment": [
+        "Premium",
+        "Regular",
+        "Occasional",
+        "New"
+    ],
+    "Customers": [
+        320,
+        540,
+        280,
+        150
+    ]
 })
 
 inventory_data = pd.DataFrame({
-    "Category": ["Electronics", "Fashion", "Groceries", "Furniture", "Accessories"],
-    "Stock": [120, 80, 200, 40, 150]
+    "Category": [
+        "Electronics",
+        "Fashion",
+        "Groceries",
+        "Furniture",
+        "Accessories"
+    ],
+    "Stock": [
+        120,
+        80,
+        200,
+        40,
+        150
+    ]
 })
 
 forecast_data = pd.DataFrame({
-    "Month": ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
-    "Predicted Sales": [12000, 15000, 17000, 21000, 24000, 26000]
+    "Month": [
+        "Jan",
+        "Feb",
+        "Mar",
+        "Apr",
+        "May",
+        "Jun"
+    ],
+    "Predicted Sales": [
+        12000,
+        15000,
+        17000,
+        21000,
+        24000,
+        26000
+    ]
 })
 
 churn_data = pd.DataFrame({
-    "Customer": ["C101", "C102", "C103", "C104", "C105"],
-    "Churn Risk": ["High", "Medium", "Low", "High", "Medium"]
+    "Customer": [
+        "C101",
+        "C102",
+        "C103",
+        "C104",
+        "C105"
+    ],
+    "Churn Risk": [
+        "High",
+        "Medium",
+        "Low",
+        "High",
+        "Medium"
+    ]
 })
 
 if page == "🏠 Home":
@@ -137,7 +194,10 @@ if page == "🏠 Home":
         title="Daily Sales Trend"
     )
 
-    st.plotly_chart(sales_chart, use_container_width=True)
+    st.plotly_chart(
+        sales_chart,
+        use_container_width=True
+    )
 
     st.subheader("💡 Platform Highlights")
 
@@ -161,7 +221,10 @@ elif page == "📊 EDA":
 
     st.header("📊 Exploratory Data Analysis")
 
-    st.dataframe(sales_data, use_container_width=True)
+    st.dataframe(
+        sales_data,
+        use_container_width=True
+    )
 
     sales_hist = px.histogram(
         sales_data,
@@ -170,7 +233,10 @@ elif page == "📊 EDA":
         title="Sales Distribution"
     )
 
-    st.plotly_chart(sales_hist, use_container_width=True)
+    st.plotly_chart(
+        sales_hist,
+        use_container_width=True
+    )
 
     profit_chart = px.line(
         sales_data,
@@ -180,9 +246,14 @@ elif page == "📊 EDA":
         title="Profit Trend"
     )
 
-    st.plotly_chart(profit_chart, use_container_width=True)
+    st.plotly_chart(
+        profit_chart,
+        use_container_width=True
+    )
 
-    corr_data = sales_data[["Sales", "Customers", "Profit"]].corr()
+    corr_data = sales_data[
+        ["Sales", "Customers", "Profit"]
+    ].corr()
 
     corr_chart = px.imshow(
         corr_data,
@@ -190,7 +261,10 @@ elif page == "📊 EDA":
         title="Correlation Analysis"
     )
 
-    st.plotly_chart(corr_chart, use_container_width=True)
+    st.plotly_chart(
+        corr_chart,
+        use_container_width=True
+    )
 
 elif page == "📈 Sales Analysis":
 
@@ -203,7 +277,10 @@ elif page == "📈 Sales Analysis":
         title="Daily Sales Analysis"
     )
 
-    st.plotly_chart(sales_bar, use_container_width=True)
+    st.plotly_chart(
+        sales_bar,
+        use_container_width=True
+    )
 
     customer_line = px.line(
         sales_data,
@@ -213,7 +290,10 @@ elif page == "📈 Sales Analysis":
         title="Customer Activity"
     )
 
-    st.plotly_chart(customer_line, use_container_width=True)
+    st.plotly_chart(
+        customer_line,
+        use_container_width=True
+    )
 
     st.subheader("📌 Sales Insights")
 
@@ -232,7 +312,12 @@ elif page == "👥 Customer Segmentation":
         title="Customer Segments"
     )
 
-    st.plotly_chart(segment_chart, use_container_width=True)
+    st.plotly_chart(
+        segment_chart,
+        use_container_width=True
+    )
+
+    st.subheader("📌 Segmentation Models")
 
     st.write("• K-Means Clustering")
     st.write("• DBSCAN Clustering")
@@ -243,7 +328,10 @@ elif page == "⚠️ Churn Analysis":
 
     st.header("⚠️ Customer Churn Analysis")
 
-    st.dataframe(churn_data, use_container_width=True)
+    st.dataframe(
+        churn_data,
+        use_container_width=True
+    )
 
     churn_chart = px.bar(
         churn_data,
@@ -253,11 +341,17 @@ elif page == "⚠️ Churn Analysis":
         title="Customer Churn Risk"
     )
 
-    st.plotly_chart(churn_chart, use_container_width=True)
+    st.plotly_chart(
+        churn_chart,
+        use_container_width=True
+    )
+
+    st.subheader("📌 Churn Prediction Features")
 
     st.write("• XGBoost Churn Prediction")
     st.write("• SHAP Explainability")
     st.write("• Customer Retention Analytics")
+    st.write("• Risk Scoring System")
 
 elif page == "📦 Inventory Insights":
 
@@ -271,11 +365,17 @@ elif page == "📦 Inventory Insights":
         title="Inventory Status"
     )
 
-    st.plotly_chart(inventory_chart, use_container_width=True)
+    st.plotly_chart(
+        inventory_chart,
+        use_container_width=True
+    )
+
+    st.subheader("📌 Inventory Insights")
 
     st.write("• AI Inventory Optimization")
     st.write("• Smart Restocking")
     st.write("• Warehouse Analytics")
+    st.write("• Inventory Forecasting")
 
 elif page == "🤖 Sales Forecasting":
 
@@ -289,11 +389,17 @@ elif page == "🤖 Sales Forecasting":
         title="Demand Forecasting"
     )
 
-    st.plotly_chart(forecast_chart, use_container_width=True)
+    st.plotly_chart(
+        forecast_chart,
+        use_container_width=True
+    )
+
+    st.subheader("📌 Forecasting Models")
 
     st.write("• Prophet Forecasting")
     st.write("• LSTM Forecasting")
     st.write("• Hybrid Prophet + LSTM")
+    st.write("• Time-Series Analysis")
 
 elif page == "💡 AI Business Insights":
 
@@ -309,6 +415,14 @@ elif page == "💡 AI Business Insights":
 
     for insight in insights:
         st.success(insight)
+
+    st.subheader("📌 AI Technologies Used")
+
+    st.write("• Machine Learning")
+    st.write("• Deep Learning")
+    st.write("• Forecasting Models")
+    st.write("• Explainable AI")
+    st.write("• Automated Analytics")
 
 elif page == "📡 Monitoring Dashboard":
 
@@ -338,7 +452,10 @@ elif page == "📡 Monitoring Dashboard":
         title="CPU Monitoring"
     )
 
-    st.plotly_chart(cpu_chart, use_container_width=True)
+    st.plotly_chart(
+        cpu_chart,
+        use_container_width=True
+    )
 
 elif page == "☁️ Deployment Status":
 
@@ -365,57 +482,58 @@ elif page == "☁️ Deployment Status":
         ]
     })
 
-    st.dataframe(deployment_data, use_container_width=True)
+    st.dataframe(
+        deployment_data,
+        use_container_width=True
+    )
 
-    st.success("Production Deployment Successfully Configured 🚀")
+    st.success(
+        "Production Deployment Successfully Configured 🚀"
+    )
 
 elif page == "📅 Complete Project Roadmap":
 
     st.header("📅 RetailPulse Complete 4-Week Roadmap")
 
-    roadmap = {
-        "Week 1": [
-            "Dataset selection and EDA",
-            "Data cleaning and feature engineering",
-            "Customer segmentation",
-            "Time-series preparation",
-            "Prophet forecasting",
-            "LSTM implementation",
-            "Week 1 checkpoint"
-        ],
-        "Week 2": [
-            "Hybrid forecasting",
-            "XGBoost churn prediction",
-            "Inventory optimization",
-            "Optuna tuning",
-            "Drift detection",
-            "Automated retraining",
-            "Week 2 checkpoint"
-        ],
-        "Week 3": [
-            "Streamlit dashboard",
-            "Forecast visualizations",
-            "Churn dashboard",
-            "Inventory UI",
-            "Real-time metrics",
-            "Export functionality",
-            "Interactive checkpoint"
-        ],
-        "Week 4": [
-            "Docker setup",
-            "Kubernetes deployment",
-            "GitHub Actions CI/CD",
-            "AWS/GCP deployment",
-            "Prometheus and Grafana",
-            "Load testing",
-            "Final QA and documentation"
-        ]
-    }
+    st.subheader("Week 1 – Data Exploration & Preparation")
 
-    for week, tasks in roadmap.items():
-        st.subheader(week)
-        for idx, task in enumerate(tasks, start=1):
-            st.write(f"Day {idx} • {task}")
+    st.write("Day 1 • Dataset selection and EDA")
+    st.write("Day 2 • Data cleaning and feature engineering")
+    st.write("Day 3 • Customer segmentation")
+    st.write("Day 4 • Time-series preparation")
+    st.write("Day 5 • Prophet forecasting")
+    st.write("Day 6 • LSTM implementation")
+    st.write("Day 7 • Week 1 checkpoint")
+
+    st.subheader("Week 2 – Advanced Modeling & Churn Prediction")
+
+    st.write("Day 8 • Hybrid forecasting")
+    st.write("Day 9 • XGBoost churn prediction")
+    st.write("Day 10 • Inventory optimization")
+    st.write("Day 11 • Feature tuning with Optuna")
+    st.write("Day 12 • Drift detection")
+    st.write("Day 13 • Automated retraining")
+    st.write("Day 14 • Week 2 checkpoint")
+
+    st.subheader("Week 3 – Dashboard & Analytics Layer")
+
+    st.write("Day 15 • Streamlit dashboard")
+    st.write("Day 16 • Forecast visualizations")
+    st.write("Day 17 • Churn dashboard")
+    st.write("Day 18 • Inventory UI")
+    st.write("Day 19 • Real-time metrics")
+    st.write("Day 20 • Export functionality")
+    st.write("Day 21 • Interactive dashboard checkpoint")
+
+    st.subheader("Week 4 – Deployment & Production Polish")
+
+    st.write("Day 22 • Docker multi-stage builds")
+    st.write("Day 23 • Kubernetes manifests")
+    st.write("Day 24 • GitHub Actions CI/CD")
+    st.write("Day 25 • AWS/GCP deployment")
+    st.write("Day 26 • Prometheus and Grafana")
+    st.write("Day 27 • Load testing")
+    st.write("Day 28 • Final QA and documentation")
 
 elif page == "📋 Project Summary":
 
@@ -429,9 +547,12 @@ elif page == "📋 Project Summary":
 - NumPy
 - Plotly
 - Scikit-learn
-- XGBoost
 - Prophet
 - PyTorch Lightning
+- XGBoost
+- SHAP
+- Optuna
+- MLflow
 - Docker
 - Kubernetes
 - Prometheus
@@ -443,9 +564,10 @@ elif page == "📋 Project Summary":
 - Customer Segmentation
 - Churn Prediction
 - Inventory Optimization
-- AI Forecasting
-- Monitoring Dashboard
+- Demand Forecasting
+- AI Business Insights
 - Cloud Deployment
+- Monitoring Dashboard
 - CI/CD Automation
 
 ### 🔹 Business Benefits
@@ -456,10 +578,13 @@ elif page == "📋 Project Summary":
 - AI-powered insights
 """)
 
-    st.success("RetailPulse AI Platform Ready for Production 🚀")
+    st.success(
+        "RetailPulse AI Platform Ready for Production 🚀"
+    )
 
 st.markdown("---")
 
 st.caption(
-    f"RetailPulse Dashboard • Generated on {datetime.now().strftime('%d %B %Y %H:%M:%S')}"
+    f"RetailPulse Dashboard • Generated on "
+    f"{datetime.now().strftime('%d %B %Y %H:%M:%S')}"
 )
