@@ -53,7 +53,7 @@ The following diagram illustrates the complete end-to-end architecture of the Re
 
 <div align="center">
 
-<img src="images/project_overview.png" alt="RetailPulse Architecture" width="100%">
+<img src="project_overview.png" alt="RetailPulse Architecture" width="100%">
 
 </div>
 
@@ -140,7 +140,7 @@ The following workflow diagram represents the internal navigation flow, dashboar
 
 <div align="center">
 
-<img src="images/workflow.png" alt="RetailPulse Workflow" width="100%">
+<img src="workflow.png" alt="RetailPulse Workflow" width="100%">
 
 </div>
 
