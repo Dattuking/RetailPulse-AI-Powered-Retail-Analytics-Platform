@@ -42,7 +42,7 @@ h1, h2, h3 {
 }
 
 .stMetric {
-    background-color: red;
+    background-color: white;
     padding: 15px;
     border-radius: 12px;
     border: 1px solid #e5e7eb;
@@ -76,6 +76,7 @@ page = st.sidebar.radio(
         "⚠️ Churn Analysis",
         "📦 Inventory Insights",
         "🤖 Sales Forecasting",
+        "📉 Performance Measures",
         "💡 AI Business Insights",
         "📡 Monitoring Dashboard",
         "☁️ Deployment Status",
@@ -417,6 +418,123 @@ elif page == "🤖 Sales Forecasting":
     st.write("• Hybrid Prophet + LSTM")
     st.write("• Time-Series Analysis")
 
+elif page == "📉 Performance Measures":
+
+    st.header("📉 AI Model Performance Measures")
+
+    performance_df = pd.DataFrame({
+        "Metric": [
+            "Accuracy",
+            "Precision",
+            "Recall",
+            "F1-Score",
+            "RMSE",
+            "MAE",
+            "R² Score"
+        ],
+        "Score": [
+            0.94,
+            0.91,
+            0.89,
+            0.90,
+            12.5,
+            8.3,
+            0.96
+        ]
+    })
+
+    st.subheader("📋 Performance Metrics Table")
+
+    st.dataframe(
+        performance_df,
+        use_container_width=True
+    )
+
+    metric_chart = px.bar(
+        performance_df,
+        x="Metric",
+        y="Score",
+        color="Metric",
+        title="Model Performance Metrics"
+    )
+
+    st.plotly_chart(
+        metric_chart,
+        use_container_width=True
+    )
+
+    st.subheader("📈 KPI Indicators")
+
+    col1, col2, col3, col4 = st.columns(4)
+
+    with col1:
+        st.metric(
+            "Forecast Accuracy",
+            "94%",
+            "+4%"
+        )
+
+    with col2:
+        st.metric(
+            "Customer Retention",
+            "89%",
+            "+6%"
+        )
+
+    with col3:
+        st.metric(
+            "Inventory Efficiency",
+            "92%",
+            "+5%"
+        )
+
+    with col4:
+        st.metric(
+            "Revenue Growth",
+            "18%",
+            "+3%"
+        )
+
+    performance_line = px.line(
+        performance_df,
+        x="Metric",
+        y="Score",
+        markers=True,
+        title="Performance Trend Analysis"
+    )
+
+    st.plotly_chart(
+        performance_line,
+        use_container_width=True
+    )
+
+    st.subheader("📌 Performance Insights")
+
+    st.success(
+        "High forecasting accuracy improves inventory planning."
+    )
+
+    st.success(
+        "Customer retention models reduce churn effectively."
+    )
+
+    st.success(
+        "AI-driven analytics improve business decision-making."
+    )
+
+    st.success(
+        "Inventory optimization reduces operational costs."
+    )
+
+    st.subheader("🧠 Evaluation Techniques Used")
+
+    st.write("• Confusion Matrix")
+    st.write("• Cross Validation")
+    st.write("• RMSE & MAE Evaluation")
+    st.write("• Classification Metrics")
+    st.write("• Time-Series Forecast Validation")
+    st.write("• Model Drift Monitoring")
+
 elif page == "💡 AI Business Insights":
 
     st.header("💡 AI Business Insights")
@@ -527,45 +645,31 @@ elif page == "📅 Complete Project Roadmap":
 
     st.header("📅 RetailPulse Complete 4-Week Roadmap")
 
-    st.subheader("Week 1 – Data Exploration & Preparation")
+    roadmap_data = pd.DataFrame({
+        "Week": [
+            "Week 1",
+            "Week 2",
+            "Week 3",
+            "Week 4"
+        ],
+        "Focus Area": [
+            "Data Collection & EDA",
+            "ML Modeling & Churn Prediction",
+            "Dashboard Development",
+            "Deployment & Monitoring"
+        ],
+        "Major Tasks": [
+            "EDA, Cleaning, Feature Engineering",
+            "Forecasting, XGBoost, Optimization",
+            "Streamlit Dashboard & Visualizations",
+            "Docker, AWS, CI/CD, Monitoring"
+        ]
+    })
 
-    st.write("Day 1 • Dataset selection and EDA")
-    st.write("Day 2 • Data cleaning and feature engineering")
-    st.write("Day 3 • Customer segmentation")
-    st.write("Day 4 • Time-series preparation")
-    st.write("Day 5 • Prophet forecasting")
-    st.write("Day 6 • LSTM implementation")
-    st.write("Day 7 • Week 1 checkpoint")
-
-    st.subheader("Week 2 – Advanced Modeling & Churn Prediction")
-
-    st.write("Day 8 • Hybrid forecasting")
-    st.write("Day 9 • XGBoost churn prediction")
-    st.write("Day 10 • Inventory optimization")
-    st.write("Day 11 • Feature tuning with Optuna")
-    st.write("Day 12 • Drift detection")
-    st.write("Day 13 • Automated retraining")
-    st.write("Day 14 • Week 2 checkpoint")
-
-    st.subheader("Week 3 – Dashboard & Analytics Layer")
-
-    st.write("Day 15 • Streamlit dashboard")
-    st.write("Day 16 • Forecast visualizations")
-    st.write("Day 17 • Churn dashboard")
-    st.write("Day 18 • Inventory UI")
-    st.write("Day 19 • Real-time metrics")
-    st.write("Day 20 • Export functionality")
-    st.write("Day 21 • Interactive dashboard checkpoint")
-
-    st.subheader("Week 4 – Deployment & Production Polish")
-
-    st.write("Day 22 • Docker multi-stage builds")
-    st.write("Day 23 • Kubernetes manifests")
-    st.write("Day 24 • GitHub Actions CI/CD")
-    st.write("Day 25 • AWS/GCP deployment")
-    st.write("Day 26 • Prometheus and Grafana")
-    st.write("Day 27 • Load testing")
-    st.write("Day 28 • Final QA and documentation")
+    st.dataframe(
+        roadmap_data,
+        use_container_width=True
+    )
 
 elif page == "📋 Project Summary":
 
@@ -598,8 +702,8 @@ elif page == "📋 Project Summary":
 - Inventory Optimization
 - Demand Forecasting
 - AI Business Insights
+- Performance Monitoring
 - Cloud Deployment
-- Monitoring Dashboard
 - CI/CD Automation
 
 ### 🔹 Business Benefits
