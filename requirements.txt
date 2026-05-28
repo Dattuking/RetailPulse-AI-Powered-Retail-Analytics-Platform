@@ -13,3 +13,13 @@ shap
 optuna
 prophet
 cmdstanpy
+torch
+pytorch-lightning
+mlflow
+prometheus-client
+locust
+kubernetes
+docker
+gunicorn
+uvicorn
+pyyaml
