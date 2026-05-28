@@ -168,7 +168,23 @@ churn_data = pd.DataFrame({
 
 if page == "🏠 Home":
 
-    st.header("📈 RetailPulse Overview")
+    st.markdown("""
+    <div style="
+    background-color:#2563eb;
+    padding:14px;
+    border-radius:12px;
+    margin-bottom:15px;
+    ">
+    <h1 style="
+    color:white;
+    text-align:center;
+    font-size:34px;
+    margin:0;
+    ">
+    📈 RetailPulse Overview
+    </h1>
+    </div>
+    """, unsafe_allow_html=True)
 
     col1, col2, col3, col4 = st.columns(4)
 
@@ -426,7 +442,23 @@ elif page == "💡 AI Business Insights":
 
 elif page == "📡 Monitoring Dashboard":
 
-    st.header("📡 Real-Time Monitoring Dashboard")
+    st.markdown("""
+    <div style="
+    background-color:#059669;
+    padding:14px;
+    border-radius:12px;
+    margin-bottom:15px;
+    ">
+    <h1 style="
+    color:white;
+    text-align:center;
+    font-size:34px;
+    margin:0;
+    ">
+    📡 Real-Time Monitoring Dashboard
+    </h1>
+    </div>
+    """, unsafe_allow_html=True)
 
     col1, col2, col3 = st.columns(3)
 
