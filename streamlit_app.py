@@ -177,7 +177,7 @@ if page == "🏠 Home":
     margin-bottom:15px;
     ">
     <h1 style="
-    color:white;
+    color:red;
     text-align:center;
     font-size:34px;
     margin:0;
