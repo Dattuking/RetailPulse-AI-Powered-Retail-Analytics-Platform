@@ -47,6 +47,18 @@ into one unified intelligent retail platform.
 
 ---
 
+# 🏗️ High-Level System Architecture
+
+The following diagram illustrates the complete end-to-end architecture of the RetailPulse platform including data ingestion, machine learning pipelines, forecasting systems, MLOps, deployment, and dashboard layers.
+
+<div align="center">
+
+![RetailPulse Architecture](images/retailpulse_architecture.png)
+
+</div>
+
+---
+
 # 🌐 Live Deployment
 
 <div align="center">
@@ -55,7 +67,7 @@ into one unified intelligent retail platform.
 
 ### 🔗 Live Application
 
-https://retailpulse-ai-powered-retail-analytics-platform-vl2brzefarcyv.streamlit.app/
+[https://retailpulse-ai-powered-retail-analytics-platform-vl2brzefarcyv.streamlit.app/](https://retailpulse-ai-powered-retail-analytics-platform-vl2brzefarcyv.streamlit.app/)
 
 </div>
 
@@ -67,7 +79,7 @@ https://retailpulse-ai-powered-retail-analytics-platform-vl2brzefarcyv.streamlit
 
 ## 🔗 Source Code Repository
 
-https://github.com/Dattuking/RetailPulse-AI-Powered-Retail-Analytics-Platform
+[https://github.com/Dattuking/RetailPulse-AI-Powered-Retail-Analytics-Platform](https://github.com/Dattuking/RetailPulse-AI-Powered-Retail-Analytics-Platform)
 
 </div>
 
@@ -119,6 +131,18 @@ RetailPulse consists of multiple intelligent analytical modules integrated into 
 | ☁️ Deployment Status     | DevOps & deployment tracking               |
 | 📅 Project Roadmap       | Complete implementation lifecycle          |
 | 📋 Project Summary       | Technologies & business value              |
+
+---
+
+# 🔄 Dashboard Workflow & Navigation Architecture
+
+The following workflow diagram represents the internal navigation flow, dashboard modules, analytics pipelines, and AI-powered components integrated into the RetailPulse ecosystem.
+
+<div align="center">
+
+![RetailPulse Workflow](images/retailpulse_workflow.png)
+
+</div>
 
 ---
 
@@ -485,6 +509,10 @@ class RetailPulseUser(HttpUser):
 
 ```bash
 RetailPulse/
+│
+├── images/
+│   ├── retailpulse_architecture.png
+│   └── retailpulse_workflow.png
 │
 ├── streamlit_app.py
 ├── requirements.txt
