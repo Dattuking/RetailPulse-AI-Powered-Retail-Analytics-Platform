@@ -463,6 +463,44 @@ elif page == "📉 Performance Measures":
         use_container_width=True
     )
 
+    performance_line = px.line(
+        performance_df,
+        x="Metric",
+        y="Score",
+        markers=True,
+        title="Performance Trend Analysis"
+    )
+
+    st.plotly_chart(
+        performance_line,
+        use_container_width=True
+    )
+
+    performance_pie = px.pie(
+        performance_df,
+        names="Metric",
+        values="Score",
+        title="Performance Metrics Contribution"
+    )
+
+    st.plotly_chart(
+        performance_pie,
+        use_container_width=True
+    )
+
+    radar_chart = px.line_polar(
+        performance_df,
+        r="Score",
+        theta="Metric",
+        line_close=True,
+        title="AI Model Performance Radar"
+    )
+
+    st.plotly_chart(
+        radar_chart,
+        use_container_width=True
+    )
+
     st.subheader("📈 KPI Indicators")
 
     col1, col2, col3, col4 = st.columns(4)
@@ -495,21 +533,6 @@ elif page == "📉 Performance Measures":
             "+3%"
         )
 
-    performance_line = px.line(
-        performance_df,
-        x="Metric",
-        y="Score",
-        markers=True,
-        title="Performance Trend Analysis"
-    )
-
-    st.plotly_chart(
-        performance_line,
-        use_container_width=True
-    )
-
-    st.subheader("📌 Performance Insights")
-
     st.success(
         "High forecasting accuracy improves inventory planning."
     )
@@ -528,12 +551,40 @@ elif page == "📉 Performance Measures":
 
     st.subheader("🧠 Evaluation Techniques Used")
 
-    st.write("• Confusion Matrix")
-    st.write("• Cross Validation")
-    st.write("• RMSE & MAE Evaluation")
-    st.write("• Classification Metrics")
-    st.write("• Time-Series Forecast Validation")
-    st.write("• Model Drift Monitoring")
+    techniques_data = pd.DataFrame({
+        "Technique": [
+            "Confusion Matrix",
+            "Cross Validation",
+            "RMSE & MAE Evaluation",
+            "Classification Metrics",
+            "Time-Series Forecast Validation",
+            "Model Drift Monitoring"
+        ],
+        "Usage (%)": [
+            95,
+            90,
+            88,
+            92,
+            89,
+            85
+        ]
+    })
+
+    technique_chart = px.bar(
+        techniques_data,
+        x="Technique",
+        y="Usage (%)",
+        color="Technique",
+        title="Evaluation Techniques Performance"
+    )
+
+    st.plotly_chart(
+        technique_chart,
+        use_container_width=True
+    )
+
+    for technique in techniques_data["Technique"]:
+        st.write(f"• {technique}")
 
 elif page == "💡 AI Business Insights":
 
@@ -568,7 +619,7 @@ elif page == "📡 Monitoring Dashboard":
     margin-bottom:15px;
     ">
     <h1 style="
-    color:white;
+    color:red;
     text-align:center;
     font-size:34px;
     margin:0;
