@@ -284,16 +284,37 @@ elif page == "📊 Analytics Dashboard":
 
     st.header("📊 Retail Analytics Dashboard")
 
+    st.subheader("📌 Exploratory Data Analysis (EDA)")
+
+    st.write("""
+    Exploratory Data Analysis helps understand:
+
+    • Sales distribution  
+    • Customer trends  
+    • Profit patterns  
+    • Missing values  
+    • Correlation between variables  
+    • Business insights from data  
+    """)
+
     st.dataframe(sales_data, use_container_width=True)
 
-    sales_chart = px.bar(
+    st.markdown("---")
+
+    st.subheader("📈 Sales Distribution")
+
+    sales_hist = px.histogram(
         sales_data,
-        x="Date",
-        y="Sales",
-        title="Retail Sales Analysis"
+        x="Sales",
+        nbins=10,
+        title="Sales Distribution Analysis"
     )
 
-    st.plotly_chart(sales_chart, use_container_width=True)
+    st.plotly_chart(sales_hist, use_container_width=True)
+
+    st.markdown("---")
+
+    st.subheader("📉 Profit Trend Analysis")
 
     profit_chart = px.line(
         sales_data,
@@ -305,15 +326,42 @@ elif page == "📊 Analytics Dashboard":
 
     st.plotly_chart(profit_chart, use_container_width=True)
 
+    st.markdown("---")
+
+    st.subheader("👥 Customer Activity")
+
     customer_chart = px.line(
         sales_data,
         x="Date",
         y="Customers",
         markers=True,
-        title="Customer Activity"
+        title="Customer Activity Analysis"
     )
 
     st.plotly_chart(customer_chart, use_container_width=True)
+
+    st.markdown("---")
+
+    st.subheader("📊 Correlation Analysis")
+
+    correlation_data = sales_data[["Sales", "Customers", "Profit"]].corr()
+
+    corr_chart = px.imshow(
+        correlation_data,
+        text_auto=True,
+        title="Correlation Heatmap"
+    )
+
+    st.plotly_chart(corr_chart, use_container_width=True)
+
+    st.markdown("---")
+
+    st.subheader("📌 EDA Insights")
+
+    st.write("• Strong positive relationship between sales and profit")
+    st.write("• Customer traffic impacts revenue growth")
+    st.write("• Business shows stable upward trends")
+    st.write("• Data prepared for forecasting and ML modeling")
 
 elif page == "🤖 Demand Forecasting":
 
